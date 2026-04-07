@@ -2,6 +2,21 @@
 HOW TO RUN THE TRANSMISSION LINE FAULT DETECTION APP
 ===========================================
 
+CHATBOT SETUP (GROQ API KEY)
+----------------------------
+Before starting the app, set your Groq API key in the same terminal:
+
+PowerShell:
+   $env:GROQ_API_KEY="PASTE_YOUR_GROQ_API_KEY_HERE"
+
+Command Prompt:
+   set GROQ_API_KEY=PASTE_YOUR_GROQ_API_KEY_HERE
+
+Optional:
+
+   set GROQ_MODEL=llama-3.1-8b-instant
+   set GROQ_API_URL=https://api.groq.com/openai/v1/chat/completions
+
 METHOD 1: EASIEST - Double-click the batch file
 ------------------------------------------------
 1. Open File Explorer

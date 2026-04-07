@@ -28,6 +28,37 @@ py -3.14 app.py
 
 Or on Windows, double-click `RUN.bat`
 
+## Groq Chatbot Setup (New)
+
+The UI now includes a fault-domain chatbot powered by Groq through backend endpoint `POST /chat`.
+
+Set your Groq API key before starting the app.
+
+### PowerShell (current session)
+
+```powershell
+$env:GROQ_API_KEY="PASTE_YOUR_GROQ_API_KEY_HERE"
+```
+
+### Command Prompt (current session)
+
+```bat
+set GROQ_API_KEY=PASTE_YOUR_GROQ_API_KEY_HERE
+```
+
+Optional environment variables:
+
+- `GROQ_MODEL` (default: `llama-3.1-8b-instant`)
+- `GROQ_API_URL` (default: `https://api.groq.com/openai/v1/chat/completions`)
+
+Example (PowerShell):
+
+```powershell
+$env:GROQ_API_KEY="PASTE_YOUR_GROQ_API_KEY_HERE"
+$env:GROQ_MODEL="llama-3.1-8b-instant"
+py -3.14 app.py
+```
+
 2. Open your web browser and navigate to:
 ```
 http://localhost:8000
