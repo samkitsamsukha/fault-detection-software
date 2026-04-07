@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Transmission Line Fault Detection</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing: border-box; font-family: "Segoe UI", Tahoma, sans-serif; }
+body { margin: 0; background: linear-gradient(135deg, #5b6ce1, #7a4fd8); color: #fff; }
+
+.header { padding: 24px 40px; font-size: 52px; font-weight: 900; }
+.main { display: flex; gap: 30px; padding: 30px 40px; }
+
+.left-panel {
+    width: 340px;
+    background: #fff;
+    color: #000;
+    border-radius: 12px;
+    padding: 22px;
+}
+
+.left-panel h3 { margin-top: 0; margin-bottom: 15px; }
+.left-panel label { font-size: 14px; font-weight: 600; margin-top: 12px; display: block; }
+.left-panel input { width: 100%; padding: 8px; margin-top: 4px; border-radius: 6px; border: 1px solid #ccc; }
+
+.left-panel button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #3b82f6;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.secondary { background: #2563eb; }
+
+.right-panel {
+    flex: 1;
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.result-card {
+    text-align: center;
+    margin-bottom: 30px;
+    display: none;
+}
+
+.fault-text { font-size: 32px; font-weight: 800; margin-bottom: 12px; }
+
+.confidence-bar {
+    width: 100%;
+    height: 16px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: #ef4444;
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+.confidence-text { margin: 8px 0; }
+
+.meta {
+    display: flex;
+    justify-content: space-around;
+    font-size: 14px;
+}
+
+.history-card {
+    background: #fff;
+    color: #000;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.export-btn { background: #16a34a; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; }
+.clear-btn { background: #dc2626; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { padding: 8px; text-align: center; border-bottom: 1px solid #ddd; }
+th { background: #3b82f6; color: #fff; }
+</style>
+</head>
+
+<body>
+
+<div class="header">⚡ Transmission Line Fault Detection</div>
+
+<div class="main">
+
+<!-- LEFT PANEL -->
+<div class="left-panel">
+<h3>Manual Input (ML Model)</h3>
+
+<label>Voltage Va (V)</label><input id="Va">
+<label>Voltage Vb (V)</label><input id="Vb">
+<label>Voltage Vc (V)</label><input id="Vc">
+<label>Current Ia (A)</label><input id="Ia">
+<label>Current Ib (A)</label><input id="Ib">
+<label>Current Ic (A)</label><input id="Ic">
+
+<button onclick="manualPredict()">Predict Fault (Manual)</button>
+<button class="secondary" onclick="exportCSV()">Export CSV</button>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+
+<div class="result-card" id="resultCard">
+<div class="fault-text" id="faultText">--</div>
+
+<div class="confidence-bar">
+<div class="confidence-fill" id="confFill"></div>
+</div>
+
+<div class="confidence-text" id="confText">Confidence: --</div>
+
+<div class="meta">
+<div id="timeText">Time: --</div>
+<div id="locText">Location: --</div>
+</div>
+</div>
+
+<div class="history-card">
+<div class="history-header">
+<h4>ESP32 Prediction History</h4>
+<div>
+<button class="export-btn" onclick="exportCSV()">Export CSV</button>
+<button class="clear-btn" onclick="clearHistory()">Clear</button>
+</div>
+</div>
+
+<table>
+<thead>
+<tr><th>Time</th><th>Fault</th><th>Conf (%)</th></tr>
+</thead>
+<tbody id="historyBody"></tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+<script>
+// ================= ESP32 AUTO MODE =================
+// DO NOT TOUCH INPUT BOXES
+function autoESP32() {
+    fetch("/predict_iot")
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) return;
+            showResult(data);
+        });
+}
+setInterval(autoESP32, 10000);
+
+// ================= MANUAL MODE =================
+function manualPredict() {
+    const payload = {
+        Va: Va.value,
+        Vb: Vb.value,
+        Vc: Vc.value,
+        Ia: Ia.value,
+        Ib: Ib.value,
+        Ic: Ic.value
+    };
+
+    fetch("/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => showResult(data));
+}
+
+// ================= DISPLAY =================
+function showResult(data) {
+    resultCard.style.display = "block";
+    faultText.innerText = data.fault;
+    confText.innerText = "Confidence: " + data.confidence + "%";
+    confFill.style.width = data.confidence + "%";
+    timeText.innerText = "Time: " + data.timestamp;
+    locText.innerText = "Location: " + data.latitude + ", " + data.longitude;
+    loadHistory();
+}
+
+// ================= HISTORY =================
+function loadHistory() {
+    fetch("/history")
+        .then(res => res.json())
+        .then(rows => {
+            historyBody.innerHTML = "";
+            rows.slice(0,6).forEach(r => {
+                historyBody.innerHTML += `
+                    <tr>
+                        <td>${r.timestamp || r.Timestamp}</td>
+                        <td>${r.fault || r.Fault}</td>
+                        <td>${r.confidence || r.Confidence}</td>
+                    </tr>`;
+            });
+        });
+}
+
+function exportCSV() { window.location.href = "/export"; }
+function clearHistory() { historyBody.innerHTML = ""; }
+
+loadHistory();
+</script>
+
+</body>
+</html>

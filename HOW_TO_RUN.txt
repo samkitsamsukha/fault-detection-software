@@ -1,0 +1,89 @@
+===========================================
+HOW TO RUN THE TRANSMISSION LINE FAULT DETECTION APP
+===========================================
+
+METHOD 1: EASIEST - Double-click the batch file
+------------------------------------------------
+1. Open File Explorer
+2. Navigate to: C:\Users\shree\OneDrive\Desktop\5TH_SEM_EL\ML
+3. Find the file named "RUN.bat"
+4. Double-click it
+5. A black window (Command Prompt) will open and the server will start
+6. Keep that window open
+7. Open your web browser and go to: http://localhost:8000
+
+
+METHOD 2: Using Command Prompt
+--------------------------------
+1. Press Windows key + R
+2. Type: cmd
+3. Press Enter
+4. In the black window that opens, type these commands one by one:
+
+   cd C:\Users\shree\OneDrive\Desktop\5TH_SEM_EL\ML
+   
+   py -3.14 app.py
+
+5. Press Enter after each command
+6. Wait for the message "Starting server on http://localhost:8000"
+7. Open your web browser and go to: http://localhost:8000
+8. Keep the Command Prompt window open while using the app
+
+
+METHOD 3: Using PowerShell
+---------------------------
+1. Press Windows key + X
+2. Click "Windows PowerShell" or "Terminal"
+3. In the window that opens, type:
+
+   cd C:\Users\shree\OneDrive\Desktop\5TH_SEM_EL\ML
+
+4. Press Enter
+5. Then type:
+
+   py -3.14 app.py
+
+6. Press Enter
+7. Wait for the message "Starting server on http://localhost:8000"
+8. Open your web browser and go to: http://localhost:8000
+9. Keep the PowerShell window open while using the app
+
+
+IMPORTANT NOTES:
+----------------
+- ALWAYS use "py -3.14" (not just "py") to ensure Python 3.14 is used
+- Keep the command window open while the app is running
+- To stop the server, press Ctrl+C in the command window
+- The app runs on http://localhost:8000 - make sure no other app is using port 8000
+
+
+WHAT YOU SHOULD SEE WHEN IT STARTS:
+------------------------------------
+==================================================
+Starting Transmission Line Fault Detection App
+==================================================
+
+Loading model...
+Attempting to load model from: [path to fault_model.joblib]
+✓ Model loaded successfully from [path]
+✓ Application ready!
+
+Starting server on http://localhost:8000
+==================================================
+ * Running on http://0.0.0.0:8000
+ * Debug mode: on
+
+
+TROUBLESHOOTING:
+----------------
+If you see "Model not loaded":
+- Make sure fault_model.joblib is in the same folder as app.py
+- Check that you're using "py -3.14" (not just "py")
+
+If you see "Port already in use":
+- Another instance is running. Close it first or change the port in app.py
+
+If the browser shows "This site can't be reached":
+- Make sure the server started successfully
+- Check that you're going to http://localhost:8000 (not https)
+
