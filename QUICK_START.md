@@ -25,7 +25,7 @@ You have Python 3.14 installed. The app is configured to work with it.
 
 Once the server starts, open your browser and go to:
 ```
-http://localhost:8000
+http://localhost:5000
 ```
 
 ## ✅ What's Fixed:

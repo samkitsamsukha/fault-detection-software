@@ -1,0 +1,16 @@
+{
+  "thresholds": {
+    "medium_risk_score": 45,
+    "high_risk_score": 80
+  },
+  "escalation": {
+    "low": "log_only",
+    "medium": "notify_admin",
+    "high": "notify_admin_and_trigger_mitigation",
+    "critical": "notify_admin_and_trigger_mitigation"
+  },
+  "notifications": {
+    "admin_channel": "console",
+    "email_mock_enabled": true
+  }
+}

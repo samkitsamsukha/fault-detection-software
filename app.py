@@ -8,6 +8,9 @@ import json
 from urllib import request as urlrequest
 from urllib import error as urlerror
 from datetime import datetime
+from services.decision_intelligence import DecisionIntelligenceEngine
+from services.fault_analysis_service import GeminiFaultAnalysisService
+from services.smart_governance import SmartGovernanceLayer
 
 app = Flask(__name__)
 
@@ -38,6 +41,9 @@ model = joblib.load(MODEL_PATH)
 label_encoder = joblib.load(ENCODER_PATH)
 
 latest_iot_data = None
+decision_engine = DecisionIntelligenceEngine()
+gemini_fault_analysis_service = GeminiFaultAnalysisService()
+smart_governance_layer = SmartGovernanceLayer("config/governance_policies.json")
 
 # ================= CSV INIT =================
 if not os.path.exists(CSV_FILE):
@@ -70,6 +76,18 @@ def get_latest_fault_snapshot():
             )
     except Exception:
         return "Latest fault context could not be loaded from history."
+
+
+def get_recent_fault_history(limit=15):
+    """Returns recent fault history records from CSV as a list of dicts."""
+    try:
+        with open(CSV_FILE, "r") as f:
+            rows = list(csv.DictReader(f))
+            if not rows:
+                return []
+            return rows[-limit:]
+    except Exception:
+        return []
 
 
 def ask_groq(user_message, history_messages):
@@ -137,6 +155,11 @@ def ask_groq(user_message, history_messages):
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/intelligence")
+def intelligence_console():
+    return render_template("intelligence.html")
 
 
 # ---------- RECEIVE ESP32 DATA ----------
@@ -269,6 +292,90 @@ def chat():
         return jsonify({"error": str(e)}), 500
     except Exception:
         return jsonify({"error": "Unexpected chatbot error"}), 500
+
+
+@app.route("/api/decision-intelligence", methods=["POST"])
+def run_decision_intelligence():
+    data = request.get_json(silent=True) or {}
+    fault_data = data.get("fault_data", data)
+
+    try:
+        decision_output = decision_engine.analyze_fault(fault_data)
+        return jsonify({"decision_intelligence": decision_output})
+    except Exception as e:
+        return jsonify({"error": f"Decision intelligence failed: {str(e)}"}), 500
+
+
+@app.route("/api/fault-analysis", methods=["POST"])
+def run_fault_analysis():
+    data = request.get_json(silent=True) or {}
+    fault_data = data.get("fault_data", {})
+    architecture_context = data.get("architecture_context", {})
+    fault_history = data.get("fault_history")
+    if not isinstance(fault_history, list):
+        fault_history = get_recent_fault_history(limit=12)
+
+    try:
+        analysis_output = gemini_fault_analysis_service.analyze_fault(
+            fault_json=fault_data,
+            architecture_context=architecture_context,
+            fault_history=fault_history
+        )
+        return jsonify({"fault_analysis": analysis_output})
+    except RuntimeError as e:
+        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "Unexpected fault analysis error"}), 500
+
+
+@app.route("/api/governance/evaluate", methods=["POST"])
+def run_governance_evaluation():
+    data = request.get_json(silent=True) or {}
+    decision_output = data.get("decision_intelligence", {})
+    mitigation_plan = data.get("mitigation_plan", [])
+
+    if not isinstance(decision_output, dict):
+        decision_output = {}
+    if not isinstance(mitigation_plan, list):
+        mitigation_plan = []
+
+    try:
+        governance_output = smart_governance_layer.evaluate(decision_output, mitigation_plan)
+        return jsonify({"governance": governance_output})
+    except Exception as e:
+        return jsonify({"error": f"Governance evaluation failed: {str(e)}"}), 500
+
+
+@app.route("/api/intelligent-response", methods=["POST"])
+def intelligent_response_pipeline():
+    data = request.get_json(silent=True) or {}
+    fault_data = data.get("fault_data", {})
+    architecture_context = data.get("architecture_context", {})
+    fault_history = data.get("fault_history")
+    if not isinstance(fault_history, list):
+        fault_history = get_recent_fault_history(limit=12)
+
+    try:
+        decision_output = decision_engine.analyze_fault(fault_data)
+        analysis_output = gemini_fault_analysis_service.analyze_fault(
+            fault_json=fault_data,
+            architecture_context=architecture_context,
+            fault_history=fault_history
+        )
+        governance_output = smart_governance_layer.evaluate(
+            decision_output,
+            analysis_output.get("mitigation_plan", [])
+        )
+
+        return jsonify({
+            "decision_intelligence": decision_output,
+            "fault_analysis": analysis_output,
+            "governance": governance_output
+        })
+    except RuntimeError as e:
+        return jsonify({"error": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": f"Intelligent response pipeline failed: {str(e)}"}), 500
 
 
 # ================= RUN =================

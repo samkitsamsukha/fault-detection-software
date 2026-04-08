@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Fault Response Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Manrope", "sans-serif"],
+                        mono: ["IBM Plex Mono", "monospace"]
+                    },
+                    colors: {
+                        steel: {
+                            900: "#0b1724",
+                            800: "#12263b"
+                        },
+                        ember: {
+                            500: "#f97316",
+                            600: "#ea580c"
+                        },
+                        mint: {
+                            400: "#34d399",
+                            500: "#10b981"
+                        }
+                    },
+                    keyframes: {
+                        enterUp: {
+                            "0%": { opacity: "0", transform: "translateY(12px)" },
+                            "100%": { opacity: "1", transform: "translateY(0)" }
+                        }
+                    },
+                    animation: {
+                        enterUp: "enterUp 0.5s ease-out both"
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="min-h-screen bg-slate-100 font-sans text-slate-900">
+    <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.18),_transparent_45%),radial-gradient(circle_at_bottom_right,_rgba(249,115,22,0.17),_transparent_48%)]"></div>
+
+    <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <header class="mb-7 animate-enterUp rounded-3xl border border-white bg-white/80 p-6 shadow-xl backdrop-blur">
+            <p class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">AI + Governance Pipeline</p>
+            <h1 class="mt-3 text-3xl font-extrabold tracking-tight text-steel-900 sm:text-4xl">Intelligent Fault Response Console</h1>
+            <p class="mt-2 max-w-3xl text-sm text-slate-700 sm:text-base">This console runs graph-based decision intelligence, Gemini root-cause interpretation, and policy-driven governance orchestration in one request.</p>
+        </header>
+
+        <section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <article class="animate-enterUp rounded-3xl border border-slate-200 bg-white p-5 shadow-lg" style="animation-delay: 0.08s;">
+                <h2 class="text-lg font-bold text-steel-900">Input Payload</h2>
+                <p class="mt-1 text-sm text-slate-600">Provide structured JSON for fault, architecture context, and history.</p>
+
+                <div class="mt-4 space-y-4">
+                    <div>
+                        <label for="faultJson" class="text-xs font-semibold uppercase tracking-wide text-slate-500">Fault JSON</label>
+                        <textarea id="faultJson" rows="8" class="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 p-3 font-mono text-xs outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200">{
+  "fault_id": "F-2026-0410",
+  "fault_type": "LLG Fault",
+  "component": "fault_detection_service",
+  "severity": "high",
+  "confidence": 96.4,
+  "metrics": {
+    "Ia": 0.11,
+    "Ib": 0.09,
+    "Ic": 0.95
+  }
+}</textarea>
+                    </div>
+
+                    <div>
+                        <label for="archJson" class="text-xs font-semibold uppercase tracking-wide text-slate-500">System Architecture Context</label>
+                        <textarea id="archJson" rows="8" class="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 p-3 font-mono text-xs outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200">{
+  "zone": "West Grid",
+  "critical_services": ["decision_engine", "switch_controller"],
+  "redundancy": {
+    "telemetry_api": true,
+    "mitigation_orchestrator": false
+  }
+}</textarea>
+                    </div>
+
+                    <div>
+                        <label for="historyJson" class="text-xs font-semibold uppercase tracking-wide text-slate-500">Fault History JSON (array)</label>
+                        <textarea id="historyJson" rows="8" class="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 p-3 font-mono text-xs outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200">[
+  {
+    "fault_id": "F-2026-0409",
+    "fault_type": "LG Fault",
+    "severity": "medium",
+    "component": "telemetry_api",
+    "resolved": true
+  },
+  {
+    "fault_id": "F-2026-0408",
+    "fault_type": "LL Fault",
+    "severity": "high",
+    "component": "substation_relay_cluster",
+    "resolved": false
+  }
+]</textarea>
+                    </div>
+                </div>
+
+                <button id="runBtn" type="button" class="mt-5 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60">Run Intelligent Pipeline</button>
+                <p id="status" class="mt-3 text-sm font-semibold text-slate-700">Ready.</p>
+            </article>
+
+            <article class="animate-enterUp rounded-3xl border border-slate-200 bg-steel-900 p-5 shadow-xl" style="animation-delay: 0.14s;">
+                <h2 class="text-lg font-bold text-white">Pipeline Output</h2>
+                <p class="mt-1 text-sm text-slate-300">Explore each component independently and inspect full payload when needed.</p>
+
+                <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                    <div class="rounded-xl border border-emerald-300/30 bg-emerald-300/10 p-3">
+                        <p class="text-[11px] uppercase tracking-[0.18em] text-emerald-100">Risk Score</p>
+                        <p id="kpiRisk" class="mt-1 text-2xl font-extrabold text-white">--</p>
+                    </div>
+                    <div class="rounded-xl border border-amber-300/30 bg-amber-300/10 p-3">
+                        <p class="text-[11px] uppercase tracking-[0.18em] text-amber-100">Priority</p>
+                        <p id="kpiPriority" class="mt-1 text-lg font-bold text-white">--</p>
+                    </div>
+                    <div class="rounded-xl border border-sky-300/30 bg-sky-300/10 p-3">
+                        <p class="text-[11px] uppercase tracking-[0.18em] text-sky-100">Workflow</p>
+                        <p id="kpiWorkflow" class="mt-1 text-sm font-bold text-white">--</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 space-y-3">
+                    <details open class="rounded-2xl border border-white/20 bg-steel-800/80 p-4">
+                        <summary class="cursor-pointer text-sm font-bold uppercase tracking-[0.16em] text-emerald-200">Decision Intelligence Engine</summary>
+                        <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
+                                <p class="text-xs uppercase tracking-wide text-slate-300">Seed Component</p>
+                                <p id="decisionSeed" class="mt-1 text-sm font-semibold text-white">--</p>
+                            </div>
+                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
+                                <p class="text-xs uppercase tracking-wide text-slate-300">Severity Escalation</p>
+                                <p id="decisionSeverity" class="mt-1 text-sm font-semibold text-white">--</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
+                            <p class="text-xs uppercase tracking-wide text-slate-300">Impacted Components</p>
+                            <div id="decisionImpacted" class="mt-2 flex flex-wrap gap-2"></div>
+                        </div>
+                    </details>
+
+                    <details open class="rounded-2xl border border-white/20 bg-steel-800/80 p-4">
+                        <summary class="cursor-pointer text-sm font-bold uppercase tracking-[0.16em] text-cyan-200">AI Fault Interpretation</summary>
+                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
+                            <p class="text-xs uppercase tracking-wide text-slate-300">Root Cause</p>
+                            <p id="aiRootCause" class="mt-1 text-sm leading-6 text-slate-100">--</p>
+                        </div>
+                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
+                            <p class="text-xs uppercase tracking-wide text-slate-300">Mitigation Plan</p>
+                            <ol id="aiMitigation" class="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-100"></ol>
+                        </div>
+                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
+                            <p class="text-xs uppercase tracking-wide text-slate-300">Preventive Recommendations</p>
+                            <ul id="aiPrevention" class="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-100"></ul>
+                        </div>
+                    </details>
+
+                    <details open class="rounded-2xl border border-white/20 bg-steel-800/80 p-4">
+                        <summary class="cursor-pointer text-sm font-bold uppercase tracking-[0.16em] text-amber-200">Smart Governance Layer</summary>
+                        <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
+                                <p class="text-xs uppercase tracking-wide text-slate-300">Workflow</p>
+                                <p id="govWorkflow" class="mt-1 text-sm font-semibold text-white">--</p>
+                            </div>
+                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
+                                <p class="text-xs uppercase tracking-wide text-slate-300">Actions</p>
+                                <p id="govActions" class="mt-1 text-sm font-semibold text-white">--</p>
+                            </div>
+                        </div>
+                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
+                            <p class="text-xs uppercase tracking-wide text-slate-300">Notifications</p>
+                            <ul id="govNotifications" class="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-100"></ul>
+                        </div>
+                    </details>
+                </div>
+
+                <details class="mt-4 rounded-2xl border border-white/15 bg-black/20 p-3">
+                    <summary class="cursor-pointer text-xs font-bold uppercase tracking-[0.16em] text-slate-300">Raw JSON (Debug)</summary>
+                    <pre id="output" class="mt-3 max-h-[280px] overflow-auto rounded-xl border border-white/15 bg-black/20 p-3 font-mono text-xs leading-6 text-emerald-200">{
+  "status": "No run yet"
+}</pre>
+                </details>
+            </article>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/faultAnalysisService.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/intelligence_dashboard.js') }}"></script>
+</body>
+</html>

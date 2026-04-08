@@ -59,9 +59,42 @@ $env:GROQ_MODEL="llama-3.1-8b-instant"
 py -3.14 app.py
 ```
 
+## Intelligent Fault Response Setup (Gemini)
+
+The new Intelligence Console at `/intelligence` uses Gemini for root-cause analysis and mitigation planning.
+
+Set your Gemini API key before starting the app.
+
+### PowerShell (current session)
+
+```powershell
+$env:GEMINI_API_KEY="PASTE_YOUR_GEMINI_API_KEY_HERE"
+```
+
+### Command Prompt (current session)
+
+```bat
+set GEMINI_API_KEY=PASTE_YOUR_GEMINI_API_KEY_HERE
+```
+
+Optional Gemini environment variables:
+
+- `GEMINI_MODEL` (default: `gemini-2.0-flash`)
+- `GEMINI_API_URL` (default: `https://generativelanguage.googleapis.com`)
+- `GEMINI_MAX_RETRIES` (default: `3`)
+- `GEMINI_FALLBACK_MODELS` (default: `gemini-2.0-flash,gemini-1.5-flash-latest,gemini-1.5-pro-latest`)
+
+Intelligence routes added:
+
+- `GET /intelligence` - separate UI for intelligent response workflow
+- `POST /api/decision-intelligence` - graph-based impact + cascade analysis
+- `POST /api/fault-analysis` - Gemini fault interpretation service
+- `POST /api/governance/evaluate` - policy-driven governance actions
+- `POST /api/intelligent-response` - end-to-end orchestrated pipeline
+
 2. Open your web browser and navigate to:
 ```
-http://localhost:8000
+http://localhost:5000
 ```
 
 **Note:** If `py` defaults to Python 3.7, always use `py -3.14` to run the app.
@@ -105,4 +138,4 @@ ML/
 - Check the console output for loading errors
 
 **Port Already in Use:**
-- Modify the port in `app.py` (line 325): change `port=8000` to an available port
+- Modify the port in `app.py` to an available port if needed (default is `5000`)
