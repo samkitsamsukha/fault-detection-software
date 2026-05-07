@@ -1,3 +1,4 @@
+
 \chapter{System Design and Architecture for Intelligent Fault Detection and Predictive Governance}
 
 Designing an intelligent fault detection system for power transmission lines requires careful consideration of real-time constraints, system scalability, and decision-making capabilities. The system must process high-frequency sensor data, accurately classify faults, and provide meaningful insights for operators. This chapter presents the design specifications, modeling choices, and architecture of the proposed multi-layered system. It also details the methodology and design considerations involved in integrating embedded machine learning, decision intelligence, and generative AI.
@@ -5,11 +6,14 @@ Designing an intelligent fault detection system for power transmission lines req
 \section{Specifications for the Design}
 
 The system is designed with the following specifications:
-\begin{itemize}
+\begin{itemize}[label=$\diamond$]
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Input: Real-time voltage and current sensor data from transmission lines
 \item Output: Fault classification, risk score, and AI-generated insights
 \item Model: Decision Tree for embedded real-time inference
-\item Processing: Edge-based inference using embedded systems (ESP32/Raspberry Pi)
+\item Processing: Edge-based inference using embedded systems (Raspberry Pi)
 \item Intelligence: Decision Engine for cascading analysis and Llama 3 for interpretation
 \item Robustness: Ability to handle noisy sensor data and varying load conditions
 \item Evaluation: Performance measured using classification accuracy, latency, and system reliability
@@ -19,15 +23,12 @@ The system is designed with the following specifications:
 
 The design begins with evaluating traditional fault detection methods and machine learning models. While complex models such as Random Forest and Neural Networks offer high accuracy, they are not suitable for embedded deployment due to computational overhead.
 
-Decision Trees are selected as the primary model due to:
-\begin{itemize}
-\item Low computational complexity
-\item Fast inference suitable for real-time applications
-\item High interpretability
-\end{itemize}
-
+Decision Trees are selected as the primary model due to their low computational complexity, fast inference suitable for real-time applications, and high interpretability.
 To enhance system capabilities beyond classification, the following components are incorporated:
 \begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Embedded ML for real-time fault detection
 \item Decision Intelligence Engine for cascading effect analysis
 \item Generative AI (Llama 3) for fault interpretation and mitigation
@@ -54,14 +55,14 @@ This structured pipeline ensures both fast detection and intelligent decision-ma
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{Figures/system_pipeline_flow.png}
+	\includegraphics[width=1.0\textwidth]{Figures/pipeline_process.png}
 	\caption{Intelligent Fault Detection and Decision Pipeline}
 	\label{fig:system_pipeline}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1.0\textwidth]{Figures/data_pipeline_augmentation.png}
+	\includegraphics[width=1.0\textwidth]{Figures/hardware_pipeline.png}
 	\caption{Sensor Data Acquisition and Processing Pipeline}
 	\label{fig:data_pipeline}
 \end{figure}

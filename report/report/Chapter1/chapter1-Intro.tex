@@ -8,8 +8,6 @@ Traditional protection systems rely on relay-based mechanisms that often lack ad
 
 This project extends beyond conventional fault detection by introducing a multi-layered intelligent system integrating Embedded Machine Learning, Decision Intelligence, and Generative AI. The system not only detects faults in real time but also analyzes cascading effects, predicts operational risks, and provides actionable insights through natural language explanations.
 
-By combining edge-based inference with AI-driven governance, the system transforms reactive monitoring into proactive and predictive grid management.
-
 \section{\textbf{Literature Review}}
 
 Recent research in transmission line fault detection has explored various machine learning approaches. Studies show that models such as Naive Bayes, Random Forest, and Decision Trees achieve high accuracy in classifying faults using voltage and current datasets. Decision Trees, in particular, are preferred for embedded systems due to their low computational complexity and fast inference.
@@ -32,17 +30,19 @@ This project is motivated by the vision of transforming power grid monitoring in
 
 \section{\textbf{Problem Statement}}
 
-Existing transmission line monitoring systems are limited to fault detection and classification, lacking capabilities for system-wide impact analysis, predictive risk assessment, and intelligent decision support. This results in delayed responses, inefficient resource allocation, and increased risk of cascading failures in power grids.
+Traditional transmission line monitoring systems often rely on manual observation or basic threshold-based methods, which may not provide timely fault detection or meaningful analysis of changing electrical conditions. This can lead to delayed response, reduced reliability, and potential equipment damage. There is a need for an intelligent real-time system that can continuously monitor transmission line parameters, detect and classify fault conditions, and provide actionable insights through an accessible software platform.
 
 \section{\textbf{Objectives}}
 
 The objectives of the project are:
 \begin{enumerate}
-\item To develop a real-time fault detection system using embedded machine learning on voltage and current sensor data
-\item To design a Decision Intelligence Engine that evaluates cascading effects and system dependencies
-\item To integrate Llama 3-based Generative AI for fault interpretation, root cause analysis, and mitigation strategy generation
-\item To implement a Smart Governance Layer for automated alerts, escalation workflows, and policy-driven responses
-\item To build a web-based dashboard for real-time monitoring, analytics, and AI-driven insights
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\item To develop an AI-based system for real-time fault detection and classification using sensor data.
+\item To integrate embedded machine learning with a web dashboard and Generative AI for intelligent monitoring and insights.
+\item To design and implement a reliable data acquisition system using voltage and current sensors for accurate real-time measurements.
+\item To enhance power system reliability and efficiency by enabling faster fault identification and response mechanisms.
 \end{enumerate}
 
 \section{\textbf{Brief Methodology of the Project}}
@@ -60,10 +60,13 @@ The Smart Governance Layer automates alerts, escalation mechanisms, and policy-b
 Finally, a web-based dashboard built using React and Flask provides real-time visualization, historical analytics, and AI-driven insights for operators.
 
 This approach transforms the system from simple fault detection to an intelligent predictive governance framework.
-
+\pagebreak
 \section{\textbf{Assumptions and Constraints}}
 
 \begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Real-time sensor data is assumed to be accurate and properly calibrated
 \item Embedded systems have limited computational and memory resources
 \item Decision Tree models are chosen for efficiency, though they may have slightly lower accuracy than complex models
@@ -75,6 +78,9 @@ This approach transforms the system from simple fault detection to an intelligen
 
 This report is organized as follows:
 \begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Chapter 2 discusses fundamental concepts of power systems, fault detection, and machine learning techniques
 \item Chapter 3 presents the system architecture, including embedded ML, decision intelligence, and AI integration
 \item Chapter 4 details implementation, hardware setup, and software components
