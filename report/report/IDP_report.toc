@@ -1,6 +1,6 @@
-\contentsline {chapter}{Abstract}{i}{chapter*.1}%
-\contentsline {chapter}{List of Figures}{v}{chapter*.2}%
-\contentsline {chapter}{List of Tables}{vi}{chapter*.3}%
+\contentsline {chapter}{Abstract}{i}{chapter*.4}%
+\contentsline {chapter}{List of Figures}{v}{chapter*.5}%
+\contentsline {chapter}{List of Tables}{vi}{chapter*.6}%
 \contentsline {chapter}{\numberline {1}An Intelligent Predictive Governance System for Real-Time Fault Detection in Power Transmission Lines}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}\textbf {Introduction}}{2}{section.1.1}%
 \contentsline {section}{\numberline {1.2}\textbf {Literature Review}}{2}{section.1.2}%
@@ -32,23 +32,23 @@
 \contentsline {section}{\numberline {4.3}Baseline Evaluation}{17}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Real-Time Data Acquisition}{18}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Embedded Fault Classification}{18}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Decision Intelligence Engine}{19}{section.4.6}%
+\contentsline {section}{\numberline {4.6}Decision Intelligence Engine}{18}{section.4.6}%
 \contentsline {section}{\numberline {4.7}LLM-based Interpretation and Insights}{19}{section.4.7}%
 \contentsline {section}{\numberline {4.8}Smart Governance Layer}{19}{section.4.8}%
-\contentsline {section}{\numberline {4.9}Top Level Design}{20}{section.4.9}%
+\contentsline {section}{\numberline {4.9}Top Level Design}{19}{section.4.9}%
 \contentsline {section}{\numberline {4.10}Performance Evaluation}{20}{section.4.10}%
-\contentsline {section}{\numberline {4.11}Summary}{21}{section.4.11}%
-\contentsline {chapter}{\numberline {5}Results \& Discussions}{22}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Contents of this chapter}{23}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Simulation Results}{23}{section.5.2}%
+\contentsline {section}{\numberline {4.11}Summary}{20}{section.4.11}%
+\contentsline {chapter}{\numberline {5}Results \& Discussions}{21}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Contents of this chapter}{22}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Simulation Results}{22}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Experimental Results}{23}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Performance Comparison}{24}{section.5.4}%
+\contentsline {section}{\numberline {5.4}Performance Comparison}{23}{section.5.4}%
 \contentsline {section}{\numberline {5.5}Comparison with Existing Systems}{24}{section.5.5}%
 \contentsline {section}{\numberline {5.6}Mathematical Formulation}{24}{section.5.6}%
 \contentsline {section}{\numberline {5.7}Interpretation of Results}{25}{section.5.7}%
-\contentsline {chapter}{\numberline {6}Conclusion and Future Scope}{26}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Conclusion}{27}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Future Scope}{28}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Learning Outcomes of the Project}{28}{section.6.3}%
-\contentsline {chapter}{\numberline {A}Code}{29}{appendix.A}%
-\contentsline {section}{\numberline {A.1}First Appendix}{30}{section.A.1}%
+\contentsline {chapter}{\numberline {6}Conclusion and Future Scope}{27}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusion}{28}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Future Scope}{29}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Learning Outcomes of the Project}{29}{section.6.3}%
+\contentsline {chapter}{\numberline {A}Code}{30}{appendix.A}%
+\contentsline {section}{\numberline {A.1}First Appendix}{31}{section.A.1}%

@@ -1,6 +1,8 @@
 \chapter{Results \& Discussions}
 
-Significant improvements in system performance are observed through the integration of embedded machine learning, decision intelligence, and generative AI. The evaluation compares baseline fault detection systems with the enhanced intelligent system across multiple scenarios. Both simulation and experimental results highlight the effectiveness of real-time classification, cascading impact analysis, and AI-driven interpretation. Quantitative metrics such as classification accuracy, latency, and system reliability are used to assess performance improvements. The discussion further analyzes comparative results and key inferences derived from the implemented approach.
+The results presented in this chapter represent partial outcomes of the proposed system, demonstrating the feasibility and effectiveness of integrating embedded machine learning, decision intelligence, and generative AI. At this stage, the evaluation focuses on preliminary performance trends rather than full-scale deployment validation. The comparison is carried out between baseline fault detection systems and the partially implemented intelligent system across controlled scenarios.
+
+Both simulation-based and initial experimental observations indicate improvements in real-time classification, early-stage cascading impact awareness, and AI-assisted interpretation. However, these results are limited to the current prototype setup and do not yet represent complete system optimization. Key performance indicators such as classification accuracy, latency, and system responsiveness are used for this intermediate evaluation.
 
 \section{Contents of this chapter}
 All the results obtained for the objectives are discussed in this chapter. This chapter contains:
@@ -12,91 +14,160 @@ All the results obtained for the objectives are discussed in this chapter. This 
 \end{enumerate}
 
 \section{Simulation Results}
-The initial evaluation of the Decision Tree model on labeled voltage-current datasets provides a baseline for comparison. The model demonstrates high accuracy in identifying different types of transmission line faults under controlled simulation conditions.
+The initial evaluation of the Decision Tree model on labeled voltage-current datasets provides partial baseline results for the system. Under controlled simulation conditions, the model demonstrates satisfactory performance in identifying different types of transmission line faults.
 
-However, the baseline system is limited to classification and does not provide insights into system-wide impact, cascading failures, or mitigation strategies. This highlights the need for integrating higher-level intelligence into the system.
+However, these results are limited to classification accuracy within a simulated environment. The current implementation does not yet fully incorporate system-wide impact analysis, cascading failure prediction, or adaptive mitigation strategies. These limitations indicate that the results represent an intermediate stage of system development.
+
+\begin{table}[htb]
+\centering
+\fontsize{10}{12}\selectfont
+\begin{tabular}{|p{3cm}|p{3cm}|p{6cm}|}
+\hline
+\textbf{Fault Type} & \textbf{Detection Accuracy} & \textbf{Observation} \\
+\hline
+LG Fault & High & Correct classification in most cases \\
+\hline
+LL Fault & Moderate & Occasional misclassification \\
+\hline
+3-Phase Fault & High & Stable prediction behavior \\
+\hline
+\end{tabular}
+\caption{Partial simulation results of Decision Tree model}
+\label{c5:tab1}
+\end{table}
 
 \section{Experimental Results}
-After integrating real-time data acquisition, embedded inference, decision intelligence, and Llama 3-based interpretation, the system performance improves significantly.
+The experimental results obtained from the current prototype represent partial real-time system performance. After integrating real-time data acquisition, embedded inference, and preliminary AI-based interpretation, noticeable improvements are observed.
 
-The enhanced system achieves:
+The system currently achieves:
 \begin{itemize}
-\item Fault Classification Accuracy: Above 95\%
-\item Detection Latency: Real-time (low response delay)
-\item Improved fault understanding through AI-generated insights
-\item Effective identification of high-risk and cascading fault scenarios
+\item Fault Classification Accuracy: Approximately 90–95\% (partial validation)
+\item Detection Latency: Near real-time under limited test conditions
+\item Basic AI-generated insights for fault interpretation
+\item Initial identification of potential fault severity levels
 \end{itemize}
 
-These results demonstrate the effectiveness of combining embedded ML with intelligent decision-making and AI-based reasoning.
+These results are based on controlled hardware testing and limited real-time scenarios. Full-scale validation under diverse operating conditions is yet to be completed.
+
+\begin{table}[htb]
+\centering
+\fontsize{10}{12}\selectfont
+\begin{tabular}{|p{3cm}|p{3cm}|p{6cm}|}
+\hline
+\textbf{Metric} & \textbf{Observed Value} & \textbf{Status} \\
+\hline
+Accuracy & 90--95\% & Partially validated \\
+\hline
+Latency & Low & Needs further testing \\
+\hline
+System Stability & Moderate & Under evaluation \\
+\hline
+\end{tabular}
+\caption{Partial experimental performance metrics}
+\label{c5:tab2}
+\end{table}
 
 \section{Performance Comparison}
 
 \begin{table}[htb]
 \centering
 \fontsize{10}{12}\selectfont
-\caption{Performance comparison of baseline and intelligent system}
-\label{c5:tab2}
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|p{5cm}|p{3cm}|p{3cm}|}
 \hline
-\textbf{System} \& \textbf{Accuracy} \& \textbf{Latency} \\
+\textbf{System} & \textbf{Accuracy} & \textbf{Latency} \\
 \hline
-Baseline Fault Detection (ML Only) \& 90--95\% \& Moderate \\
+Baseline Fault Detection (ML Only) & 90--95\% & Moderate \\
 \hline
-Intelligent System (ML + AI + Decision Engine) \& $>$95\% \& Low (Real-Time) \\
+Proposed System (Partial Implementation) & $\sim$95\% & Low (Near Real-Time) \\
 \hline
 \end{tabular}
+\caption{Partial comparison of baseline and intelligent system}
+\label{c5:tab3}
 \end{table}
 
-Table \ref{c5:tab2} shows the comparison between the baseline and enhanced system. The integration of decision intelligence and AI significantly improves both accuracy and responsiveness.
+Table \ref{c5:tab3} shows that even in its partial implementation stage, the proposed system demonstrates improvements in responsiveness. However, further optimization and testing are required to validate these gains under real-world conditions.
 
 \section{Comparison with Existing Systems}
 
 \begin{table}[htb]
 \centering
 \fontsize{10}{12}\selectfont
-\caption{Comparison with traditional and advanced fault detection systems}
-\label{c5:tab3}
-\begin{tabular}{|c|c|c|}
+\begin{tabular}{|p{5cm}|p{3cm}|p{3cm}|}
 \hline
-\textbf{System Type} \& \textbf{Real-Time Capability} \& \textbf{Intelligence Level} \\
+\textbf{System Type} & \textbf{Real-Time Capability} & \textbf{Intelligence Level} \\
 \hline
-Relay-Based Systems \& Moderate \& Low \\
+Relay-Based Systems & Moderate & Low \\
 \hline
-ML-Based Systems \& High \& Medium \\
+ML-Based Systems & High & Medium \\
 \hline
-Proposed Intelligent System \& High \& High (Predictive + Explainable) \\
+Proposed System (Partial) & High & Moderate (Developing) \\
 \hline
 \end{tabular}
+\caption{Comparison with existing systems (partial evaluation)}
+\label{c5:tab4}
 \end{table}
 
-Table \ref{c5:tab3} illustrates the comparison between traditional, machine learning-based, and the proposed intelligent system. The results indicate that while ML-based systems improve detection speed, the proposed system further enhances capabilities by adding predictive analysis and explainability.
+Table \ref{c5:tab4} highlights that while the proposed system shows promising improvements, its intelligence layer is still under development and not fully realized.
 
 \section{Mathematical Formulation}
 
-The classification accuracy used for evaluation is defined as:
+The proposed system performs fault classification based on six real-time electrical parameters obtained from the transmission line:
 
 \begin{equation}
-\label{eqn:accuracy}
-Accuracy = \frac{\text{Number of Correct Predictions}}{\text{Total Predictions}}
+X = [V_a, V_b, V_c, I_a, I_b, I_c]
 \end{equation}
 
-Latency is defined as the time taken by the system to detect and classify a fault:
+where $V_a, V_b, V_c$ represent the phase voltages and $I_a, I_b, I_c$ represent the corresponding phase currents. These features are acquired through sensors and digitized using an ADC before being processed by the embedded system.
+
+The Decision Tree classifier maps the input feature vector $X$ to a fault class $Y$:
 
 \begin{equation}
-\label{eqn:latency}
-Latency = t_{output} - t_{input}
+Y = f(X)
 \end{equation}
 
-The Decision Tree model partitions the feature space based on voltage and current thresholds, enabling fast classification with minimal computational cost.
+where $f(\cdot)$ represents the learned decision boundaries based on thresholding of voltage and current values. The model recursively partitions the feature space into regions corresponding to different fault types such as LG, LL, LLG, 3-phase fault, and no fault.
 
+Each decision node in the tree evaluates a condition of the form:
+
+\begin{equation}
+X_i \leq \theta
+\end{equation}
+
+where $X_i$ is one of the input features and $\theta$ is the learned threshold. This enables efficient and low-latency classification suitable for embedded deployment.
+
+To evaluate system performance under real-time conditions, classification accuracy is defined as:
+
+\begin{equation}
+Accuracy = \frac{N_{correct}}{N_{total}}
+\end{equation}
+
+where $N_{correct}$ is the number of correctly classified fault instances and $N_{total}$ is the total number of observations.
+
+The detection latency of the system is given by:
+
+\begin{equation}
+Latency = t_{prediction} - t_{acquisition}
+\end{equation}
+
+where $t_{acquisition}$ is the time at which sensor data is captured and $t_{prediction}$ is the time at which the fault is classified by the Raspberry Pi.
+
+Additionally, the real-time data acquisition process can be expressed as a discrete-time sampling operation:
+
+\begin{equation}
+X[n] = [V_a[n], V_b[n], V_c[n], I_a[n], I_b[n], I_c[n]]
+\end{equation}
+
+where $n$ represents the sampling instant. This formulation highlights that the system continuously processes streaming data for real-time fault detection.
+
+These mathematical representations collectively describe the end-to-end transformation from physical electrical signals to intelligent fault classification within the embedded system.
 \section{Interpretation of Results}
 
-The results clearly indicate that traditional fault detection systems are limited to identifying faults without understanding their broader impact. The baseline machine learning model performs well in classification but lacks decision-making capabilities.
+The results obtained at this stage indicate that the system is progressing toward an intelligent fault detection framework. However, these findings are based on partial implementation and controlled testing environments.
 
-The integration of a Decision Intelligence Engine allows the system to analyze cascading effects and assign risk scores, enabling proactive decision-making. The inclusion of Llama 3 enhances system usability by providing natural language explanations, root cause analysis, and mitigation strategies.
+The baseline machine learning model performs effectively in classification tasks, but its integration with decision intelligence and generative AI is still in the early stages. The current system demonstrates the potential for enhanced fault interpretation and preliminary risk analysis, but full cascading analysis and automated decision-making are yet to be fully realized.
 
-Furthermore, the Smart Governance Layer automates alerts and responses, reducing manual intervention and improving response time. This combination transforms the system from a reactive monitoring tool into an intelligent predictive governance platform.
+The inclusion of AI-based interpretation provides initial insights into fault conditions, but further refinement is required for accurate root cause analysis and actionable recommendations. Similarly, the automation layer for alerts and responses is under development and requires additional validation.
 
-Overall, the proposed approach demonstrates improved accuracy, reduced latency, enhanced interpretability, and better operational efficiency. These results validate the effectiveness of combining embedded machine learning with generative AI and decision intelligence for smart grid applications.
+Overall, the partial results validate the feasibility of the proposed approach. While improvements in accuracy, latency, and interpretability are observed, complete system performance can only be confirmed after full integration, large-scale testing, and real-world deployment.
 
-The findings highlight the importance of integrating detection, analysis, and decision-making into a unified system. This provides a strong foundation for real-world deployment and future enhancements in intelligent power system management.
+These findings establish a strong foundation for further development and highlight the next steps required to transform the system into a fully operational intelligent fault detection and management platform.
