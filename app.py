@@ -70,6 +70,8 @@ CHAT_HTTP_USER_AGENT = os.getenv(
     "CHAT_HTTP_USER_AGENT",
     "fault-detection-software/1.0 (+https://api.groq.com)"
 )
+RASPI_DATA_URL = os.getenv("RASPI_DATA_URL", "http://10.150.103.6:5000/data")
+RASPI_DATA_TIMEOUT = int(os.getenv("RASPI_DATA_TIMEOUT", "10"))
 
 CHAT_SYSTEM_PROMPT = (
     "You are GridGuard Assistant, a concise technical assistant for transmission line faults. "
@@ -133,6 +135,28 @@ def get_recent_fault_history(limit=15):
             return rows[-limit:]
     except Exception:
         return []
+
+
+def fetch_raspi_data():
+    """Fetch latest telemetry from the Raspberry Pi data endpoint."""
+    try:
+        with urlrequest.urlopen(RASPI_DATA_URL, timeout=RASPI_DATA_TIMEOUT) as response:
+            if response.status != 200:
+                raise RuntimeError(f"RasPi API returned HTTP {response.status}")
+            raw = response.read().decode("utf-8")
+            telemetry = json.loads(raw)
+            if not isinstance(telemetry, dict):
+                raise RuntimeError("RasPi API returned invalid JSON payload")
+            return telemetry
+    except urlerror.HTTPError as e:
+        details = e.read().decode("utf-8", errors="ignore")
+        raise RuntimeError(f"RasPi API HTTP {e.code}: {details[:300]}")
+    except urlerror.URLError as e:
+        raise RuntimeError(f"RasPi API connectivity error: {e.reason}")
+    except ValueError as e:
+        raise RuntimeError(f"RasPi API returned malformed JSON: {e}")
+    except Exception as e:
+        raise RuntimeError(f"Failed to fetch RasPi data: {e}")
 
 
 def ask_groq(user_message, history_messages):
@@ -219,17 +243,33 @@ def receive_iot_data():
 # ---------- PREDICT USING ESP32 DATA ----------
 @app.route("/predict_iot")
 def predict_from_iot():
-    if not latest_iot_data:
-        return jsonify({"error": "No IoT data yet"})
+    try:
+        iot_data = fetch_raspi_data()
+    except RuntimeError as e:
+        return jsonify({"error": str(e)}), 502
 
-    Va = float(latest_iot_data.get("Va", 0))
-    Vb = float(latest_iot_data.get("Vb", 0))
-    Vc = float(latest_iot_data.get("Vc", 0))
-    Ia = float(latest_iot_data.get("Ia", 0))
-    Ib = float(latest_iot_data.get("Ib", 0))
-    Ic = float(latest_iot_data.get("Ic", 0))
+    Va = float(iot_data.get("Va", 0))
+    Vb = float(iot_data.get("Vb", 0))
+    Vc = float(iot_data.get("Vc", 0))
+    Ia = float(iot_data.get("Ia", 0))
+    Ib = float(iot_data.get("Ib", 0))
+    Ic = float(iot_data.get("Ic", 0))
 
-    # 🔴 RULE-BASED LOGIC (ESP32 ONLY)
+    # Preserve the latest fetched RasPi telemetry for debugging and history if needed
+    global latest_iot_data
+    latest_iot_data = iot_data
+
+    raw_data = {
+        "Va": iot_data.get("Va"),
+        "Vb": iot_data.get("Vb"),
+        "Vc": iot_data.get("Vc"),
+        "Ia": iot_data.get("Ia"),
+        "Ib": iot_data.get("Ib"),
+        "Ic": iot_data.get("Ic"),
+        "fault": iot_data.get("fault")
+    }
+
+    # 🔴 RULE-BASED LOGIC (ESP32 / RasPi telemetry)
     zero_count = sum([
         Ia < ZERO_THRESHOLD,
         Ib < ZERO_THRESHOLD,
@@ -274,7 +314,8 @@ def predict_from_iot():
         "confidence": confidence,
         "timestamp": timestamp,
         "latitude": latitude,
-        "longitude": longitude
+        "longitude": longitude,
+        "raw_data": raw_data
     })
 
 

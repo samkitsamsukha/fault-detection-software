@@ -158,6 +158,37 @@
                             <p id="locText" class="mt-1 text-sm font-semibold text-white">Location: --</p>
                         </div>
                     </div>
+
+                    <div class="mt-6 rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+                        <p class="text-xs uppercase tracking-wide text-slate-300">Raw RasPi Telemetry</p>
+                        <div class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                            <div class="rounded-2xl border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Va</p>
+                                <p id="rawVa" class="mt-2 font-semibold text-white">--</p>
+                            </div>
+                            <div class="rounded-2xl border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Vb</p>
+                                <p id="rawVb" class="mt-2 font-semibold text-white">--</p>
+                            </div>
+                            <div class="rounded-2xl border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Vc</p>
+                                <p id="rawVc" class="mt-2 font-semibold text-white">--</p>
+                            </div>
+                            <div class="rounded-2xl border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Ia</p>
+                                <p id="rawIa" class="mt-2 font-semibold text-white">--</p>
+                            </div>
+                            <div class="rounded-2xl border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Ib</p>
+                                <p id="rawIb" class="mt-2 font-semibold text-white">--</p>
+                            </div>
+                            <div class="rounded-2xl border border-white/10 bg-slate-900/80 px-3 py-3 text-sm text-slate-200">
+                                <p class="text-xs uppercase tracking-wide text-slate-500">Ic</p>
+                                <p id="rawIc" class="mt-2 font-semibold text-white">--</p>
+                            </div>
+                        </div>
+                        <p class="mt-4 text-sm text-slate-400">Reported device fault: <span id="rawFaultText">--</span></p>
+                    </div>
                 </article>
 
                 <article class="animate-rise rounded-3xl border border-white/15 bg-slate-900/45 p-4 shadow-glow backdrop-blur-xl sm:p-6" style="animation-delay: 0.17s;">
@@ -246,7 +277,7 @@
                 <article class="animate-rise rounded-3xl border border-white/15 bg-white p-4 text-slate-900 shadow-2xl sm:p-6" style="animation-delay: 0.2s;">
                     <div class="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                         <div>
-                            <h3 class="font-heading text-xl font-bold text-slate-900">ESP32 Prediction History</h3>
+                            <h3 class="font-heading text-xl font-bold text-slate-900">ID3 Model Prediction History</h3>
                             <p class="text-sm text-slate-500">Newest entries from saved CSV predictions.</p>
                         </div>
                         <div class="flex gap-2">
@@ -289,6 +320,13 @@
             confFill: document.getElementById("confFill"),
             timeText: document.getElementById("timeText"),
             locText: document.getElementById("locText"),
+            rawVa: document.getElementById("rawVa"),
+            rawVb: document.getElementById("rawVb"),
+            rawVc: document.getElementById("rawVc"),
+            rawIa: document.getElementById("rawIa"),
+            rawIb: document.getElementById("rawIb"),
+            rawIc: document.getElementById("rawIc"),
+            rawFaultText: document.getElementById("rawFaultText"),
             historyBody: document.getElementById("historyBody"),
             statusText: document.getElementById("statusText"),
             statsTopFault: document.getElementById("statsTopFault"),
@@ -448,7 +486,7 @@
                         return;
                     }
                     showResult(data);
-                    updateLiveStats(data, "ESP32 Auto");
+                    updateLiveStats(data, "RasPi");
                     setStatus("Auto update from ESP32 completed.", false);
                 })
                 .catch(() => {
@@ -489,6 +527,7 @@
         }
 
         function showResult(data) {
+            const raw = data.raw_data || {};
             ids.resultCard.classList.remove("hidden");
             ids.faultText.textContent = data.fault;
             ids.faultBadge.textContent = (data.fault || "Unknown").replace(/\s+/g, " ");
@@ -497,6 +536,13 @@
             ids.confFill.style.width = Math.max(0, Math.min(100, Number(data.confidence))) + "%";
             ids.timeText.textContent = "Time: " + data.timestamp;
             ids.locText.textContent = "Location: " + data.latitude + ", " + data.longitude;
+            ids.rawVa.textContent = raw.Va ?? "--";
+            ids.rawVb.textContent = raw.Vb ?? "--";
+            ids.rawVc.textContent = raw.Vc ?? "--";
+            ids.rawIa.textContent = raw.Ia ?? "--";
+            ids.rawIb.textContent = raw.Ib ?? "--";
+            ids.rawIc.textContent = raw.Ic ?? "--";
+            ids.rawFaultText.textContent = raw.fault ?? "--";
             loadHistory();
         }
 

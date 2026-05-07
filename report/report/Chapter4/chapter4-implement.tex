@@ -19,6 +19,9 @@ The evaluation metrics used include classification accuracy and latency.
 
 The observed results are:
 \begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Fault Classification Accuracy: High accuracy for major fault types (above 95\%)
 \item Detection Latency: Low response time suitable for real-time applications
 \item Stable performance under controlled test conditions
@@ -31,10 +34,13 @@ To enable real-time monitoring, voltage and current data are continuously captur
 
 Key components include:
 \begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Voltage Sensors (ZMPT101B) for measuring line voltage
 \item Current Sensors (ACS712) for detecting current variations
 \item MCP3008 ADC for analog-to-digital conversion
-\item ESP32/Raspberry Pi for data processing
+\item Raspberry Pi for data processing
 \end{itemize}
 
 Sensor data is sampled continuously and transmitted to the embedded system for further processing and analysis.
@@ -44,6 +50,9 @@ The Decision Tree model is deployed on the embedded system to perform real-time 
 
 Key implementation details:
 \begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Lightweight model optimized for embedded deployment
 \item Continuous inference on streaming sensor data
 \item Classification of multiple fault types based on voltage-current patterns
@@ -52,39 +61,25 @@ Key implementation details:
 This ensures fast and reliable detection with minimal computational overhead.
 
 \section{Decision Intelligence Engine}
+
 Once a fault is detected, the system analyzes its broader impact using a Decision Intelligence Engine.
 
-Key functionalities include:
-\begin{itemize}
-\item Evaluation of cascading effects across the grid
-\item Analysis of system dependencies and affected nodes
-\item Assignment of risk scores based on severity and impact
-\end{itemize}
+The Decision Intelligence Engine evaluates cascading effects across the grid, analyzes system dependencies and affected nodes, and assigns risk scores based on severity and impact.
 
 This component enables proactive decision-making rather than reactive fault handling.
 
 \section{LLM-based Interpretation and Insights}
+
 A Generative AI layer powered by Llama 3 is integrated to enhance system intelligence.
 
-The AI module performs:
-\begin{itemize}
-\item Root cause analysis of detected faults
-\item Natural language explanation of fault conditions
-\item Generation of mitigation strategies for operators
-\end{itemize}
+The AI module performs root cause analysis of detected faults, provides natural language explanations of fault conditions, and generates mitigation strategies for operators.
 
 This improves system usability by translating technical outputs into actionable insights.
-
 \section{Smart Governance Layer}
+
 To automate system response, a governance layer is implemented.
 
-The module includes:
-\begin{itemize}
-\item Automated alerts and notifications
-\item Escalation workflows based on risk levels
-\item Policy-driven actions for critical fault scenarios
-\item Logging and report generation for analysis and compliance
-\end{itemize}
+The module includes automated alerts and notifications, escalation workflows based on risk levels, policy-driven actions for critical fault scenarios, and logging and report generation for analysis and compliance.
 
 This ensures structured and efficient handling of faults in real time.
 
@@ -92,6 +87,9 @@ This ensures structured and efficient handling of faults in real time.
 The overall system workflow can be described as a sequential pipeline:
 
 \begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
 \item Real-Time Sensor Data Acquisition
 \item Signal Processing and Preprocessing
 \item Embedded Fault Classification (Decision Tree)
