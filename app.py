@@ -9,10 +9,54 @@ from urllib import request as urlrequest
 from urllib import error as urlerror
 from datetime import datetime
 from services.decision_intelligence import DecisionIntelligenceEngine
-from services.fault_analysis_service import GeminiFaultAnalysisService
+from services.fault_analysis_service import GroqFaultAnalysisService
 from services.smart_governance import SmartGovernanceLayer
+from services.power_system_intelligence import (
+    PowerSystemIntelligenceEngine,
+    ComplianceAlertService
+)
 
 app = Flask(__name__)
+
+
+def load_local_env(env_file=".env"):
+    """Load simple KEY=VALUE pairs from .env into process environment.
+
+    Existing environment variables are not overwritten.
+    """
+    if not os.path.exists(env_file):
+        return
+
+    try:
+        with open(env_file, "r", encoding="utf-8") as f:
+            for raw_line in f:
+                line = raw_line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip('"').strip("'")
+                if key and key not in os.environ:
+                    os.environ[key] = value
+    except Exception as exc:
+        print(f"Warning: could not load {env_file}: {exc}")
+
+
+load_local_env()
+
+# ================= STARTUP LOG =================
+groq_key = os.getenv("GROQ_API_KEY")
+if groq_key:
+    key_prefix = groq_key[:8] + "..." if len(groq_key) > 8 else groq_key
+    print(f"✓ Groq API key detected: {key_prefix}")
+    primary_model = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    fallback_models = os.getenv("GROQ_FALLBACK_MODELS", "llama-3.3-70b-versatile,llama-3.2-90b-vision-preview,gemma-2-9b-it,llama-3.1-8b-instant")
+    print(f"  Primary model: {primary_model}")
+    print(f"  Fallback models: {fallback_models}")
+else:
+    print("✗ Groq API key MISSING - LLM cascading analysis disabled")
+print()
 
 # ================= CONFIG =================
 MODEL_PATH = "decision_tree_fault_model.pkl"
@@ -42,8 +86,9 @@ label_encoder = joblib.load(ENCODER_PATH)
 
 latest_iot_data = None
 decision_engine = DecisionIntelligenceEngine()
-gemini_fault_analysis_service = GeminiFaultAnalysisService()
+groq_fault_analysis_service = GroqFaultAnalysisService()
 smart_governance_layer = SmartGovernanceLayer("config/governance_policies.json")
+power_system_engine = PowerSystemIntelligenceEngine()
 
 # ================= CSV INIT =================
 if not os.path.exists(CSV_FILE):
@@ -316,7 +361,7 @@ def run_fault_analysis():
         fault_history = get_recent_fault_history(limit=12)
 
     try:
-        analysis_output = gemini_fault_analysis_service.analyze_fault(
+        analysis_output = groq_fault_analysis_service.analyze_fault(
             fault_json=fault_data,
             architecture_context=architecture_context,
             fault_history=fault_history
@@ -357,7 +402,7 @@ def intelligent_response_pipeline():
 
     try:
         decision_output = decision_engine.analyze_fault(fault_data)
-        analysis_output = gemini_fault_analysis_service.analyze_fault(
+        analysis_output = groq_fault_analysis_service.analyze_fault(
             fault_json=fault_data,
             architecture_context=architecture_context,
             fault_history=fault_history
@@ -376,6 +421,89 @@ def intelligent_response_pipeline():
         return jsonify({"error": str(e)}), 500
     except Exception as e:
         return jsonify({"error": f"Intelligent response pipeline failed: {str(e)}"}), 500
+
+
+# ================= POWER SYSTEM INTELLIGENCE PORTAL API =================
+
+@app.route("/api/power-system/machinery")
+def get_machinery_by_industry():
+    """Get machinery types for a selected industry."""
+    industry = request.args.get("industry", "Generation")
+    try:
+        machinery = PowerSystemIntelligenceEngine.get_machinery_by_industry(industry)
+        return jsonify(machinery)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/power-system/faults")
+def get_faults_by_machinery():
+    """Get possible faults for a selected machinery type."""
+    machinery = request.args.get("machinery", "Generator")
+    try:
+        faults_data = PowerSystemIntelligenceEngine.get_faults_by_machinery(machinery)
+        return jsonify(faults_data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/power-system/cascading")
+def analyze_cascading_effects():
+    """Analyze cascading effects of a fault using Gemini LLM."""
+    industry = request.args.get("industry", "Generation")
+    machinery = request.args.get("machinery", "Generator")
+    fault = request.args.get("fault", "Stator Winding Fault")
+    
+    try:
+        industry_machinery = PowerSystemIntelligenceEngine.get_machinery_by_industry(industry)
+        cascade_data = groq_fault_analysis_service.analyze_cascading_effects(
+            industry=industry,
+            machinery_type=machinery,
+            fault_type=fault,
+            machinery_options=industry_machinery
+        )
+        return jsonify(cascade_data)
+    except RuntimeError as e:
+        return jsonify({"error": str(e)}), 500
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/power-system/alert", methods=["POST"])
+def generate_alert():
+    """Generate an alert notification for a detected fault."""
+    data = request.get_json(silent=True) or {}
+    industry = data.get("industry", "Generation")
+    machinery = data.get("machinery", "Generator")
+    fault_type = data.get("fault_type", "Stator Winding Fault")
+    fault_code = data.get("fault_code", "SWF")
+    confidence = data.get("confidence", 95)
+    
+    try:
+        alert = PowerSystemIntelligenceEngine.generate_alert_notification(
+            industry, machinery, fault_type, fault_code, confidence
+        )
+        return jsonify(alert)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/power-system/compliance-report", methods=["POST"])
+def generate_compliance_report():
+    """Generate ISO 55001 compliance report."""
+    data = request.get_json(silent=True) or {}
+    industry = data.get("industry", "Generation")
+    machinery = data.get("machinery", "Generator")
+    fault_type = data.get("fault_type", "Stator Winding Fault")
+    alert_id = data.get("alert_id", "ALERT-UNKNOWN")
+    
+    try:
+        report = PowerSystemIntelligenceEngine.generate_iso_compliance_report(
+            industry, machinery, fault_type, alert_id
+        )
+        return jsonify(report)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 # ================= RUN =================

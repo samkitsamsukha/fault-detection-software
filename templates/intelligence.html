@@ -3,11 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intelligent Fault Response Console</title>
+    <title>Power System Intelligence Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .cascade-node {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .severity-critical { background-color: rgb(239, 68, 68); }
+        .severity-high { background-color: rgb(249, 115, 22); }
+        .severity-medium { background-color: rgb(251, 191, 36); }
+        .severity-low { background-color: rgb(34, 197, 94); }
+        .cascade-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .cascade-level {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .cascade-connector::before {
+            content: '';
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, #ef4444, transparent);
+        }
+    </style>
     <script>
         tailwind.config = {
             theme: {
@@ -29,174 +62,721 @@
                             400: "#34d399",
                             500: "#10b981"
                         }
-                    },
-                    keyframes: {
-                        enterUp: {
-                            "0%": { opacity: "0", transform: "translateY(12px)" },
-                            "100%": { opacity: "1", transform: "translateY(0)" }
-                        }
-                    },
-                    animation: {
-                        enterUp: "enterUp 0.5s ease-out both"
                     }
                 }
             }
         };
     </script>
 </head>
-<body class="min-h-screen bg-slate-100 font-sans text-slate-900">
-    <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.18),_transparent_45%),radial-gradient(circle_at_bottom_right,_rgba(249,115,22,0.17),_transparent_48%)]"></div>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 font-sans text-slate-100">
 
     <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <header class="mb-7 animate-enterUp rounded-3xl border border-white bg-white/80 p-6 shadow-xl backdrop-blur">
-            <p class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">AI + Governance Pipeline</p>
-            <h1 class="mt-3 text-3xl font-extrabold tracking-tight text-steel-900 sm:text-4xl">Intelligent Fault Response Console</h1>
-            <p class="mt-2 max-w-3xl text-sm text-slate-700 sm:text-base">This console runs graph-based decision intelligence, Gemini root-cause interpretation, and policy-driven governance orchestration in one request.</p>
+        <!-- Header -->
+        <header class="mb-8 rounded-2xl border border-slate-700 bg-slate-800/50 p-6 backdrop-blur-sm shadow-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <p class="inline-flex items-center rounded-full bg-red-900/30 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-red-400 border border-red-700/50">
+                        🔴 Power System Monitoring
+                    </p>
+                    <h1 class="mt-3 text-4xl font-bold tracking-tight text-white">Power System Intelligence Portal</h1>
+                    <p class="mt-2 text-slate-300">Industry-based machinery fault detection with cascading effect analysis</p>
+                </div>
+                <div class="text-right">
+                    <div id="currentTime" class="text-sm text-slate-400">Loading...</div>
+                </div>
+            </div>
         </header>
 
-        <section class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <article class="animate-enterUp rounded-3xl border border-slate-200 bg-white p-5 shadow-lg" style="animation-delay: 0.08s;">
-                <h2 class="text-lg font-bold text-steel-900">Input Payload</h2>
-                <p class="mt-1 text-sm text-slate-600">Provide structured JSON for fault, architecture context, and history.</p>
-
-                <div class="mt-4 space-y-4">
-                    <div>
-                        <label for="faultJson" class="text-xs font-semibold uppercase tracking-wide text-slate-500">Fault JSON</label>
-                        <textarea id="faultJson" rows="8" class="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 p-3 font-mono text-xs outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200">{
-  "fault_id": "F-2026-0410",
-  "fault_type": "LLG Fault",
-  "component": "fault_detection_service",
-  "severity": "high",
-  "confidence": 96.4,
-  "metrics": {
-    "Ia": 0.11,
-    "Ib": 0.09,
-    "Ic": 0.95
-  }
-}</textarea>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Sidebar: Navigation -->
+            <div class="lg:col-span-1">
+                <div class="sticky top-8 space-y-4">
+                    <div class="rounded-xl border border-slate-700 bg-slate-800/50 p-4 backdrop-blur-sm">
+                        <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wide mb-4">Analysis Steps</h3>
+                        <div class="space-y-2">
+                            <div class="step-indicator completed p-3 rounded-lg bg-green-900/20 border border-green-700/50 cursor-pointer" data-step="1">
+                                <div class="text-xs font-semibold text-green-400">✓ Step 1</div>
+                                <div class="text-sm font-bold text-white">Industry Selection</div>
+                            </div>
+                            <div class="step-indicator p-3 rounded-lg bg-slate-700/30 border border-slate-600/50 cursor-pointer" data-step="2">
+                                <div class="text-xs font-semibold text-slate-400">Step 2</div>
+                                <div class="text-sm font-bold text-white">Machinery Type</div>
+                            </div>
+                            <div class="step-indicator p-3 rounded-lg bg-slate-700/30 border border-slate-600/50 cursor-pointer" data-step="3">
+                                <div class="text-xs font-semibold text-slate-400">Step 3</div>
+                                <div class="text-sm font-bold text-white">Fault Analysis</div>
+                            </div>
+                            <div class="step-indicator p-3 rounded-lg bg-slate-700/30 border border-slate-600/50 cursor-pointer" data-step="4">
+                                <div class="text-xs font-semibold text-slate-400">Step 4</div>
+                                <div class="text-sm font-bold text-white">Cascading Effects</div>
+                            </div>
+                            <div class="step-indicator p-3 rounded-lg bg-slate-700/30 border border-slate-600/50 cursor-pointer" data-step="5">
+                                <div class="text-xs font-semibold text-slate-400">Step 5</div>
+                                <div class="text-sm font-bold text-white">Compliance Report</div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <label for="archJson" class="text-xs font-semibold uppercase tracking-wide text-slate-500">System Architecture Context</label>
-                        <textarea id="archJson" rows="8" class="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 p-3 font-mono text-xs outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200">{
-  "zone": "West Grid",
-  "critical_services": ["decision_engine", "switch_controller"],
-  "redundancy": {
-    "telemetry_api": true,
-    "mitigation_orchestrator": false
-  }
-}</textarea>
+                    <!-- Alert Summary -->
+                    <div id="alertSummary" class="rounded-xl border border-red-700/50 bg-red-900/20 p-4 hidden">
+                        <h4 class="text-sm font-bold text-red-400 mb-2">⚠️ Alert Active</h4>
+                        <div id="alertSummaryContent" class="text-xs text-slate-300 space-y-1">
+                        </div>
                     </div>
+                </div>
+            </div>
 
-                    <div>
-                        <label for="historyJson" class="text-xs font-semibold uppercase tracking-wide text-slate-500">Fault History JSON (array)</label>
-                        <textarea id="historyJson" rows="8" class="mt-1 w-full rounded-xl border border-slate-300 bg-slate-50 p-3 font-mono text-xs outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200">[
-  {
-    "fault_id": "F-2026-0409",
-    "fault_type": "LG Fault",
-    "severity": "medium",
-    "component": "telemetry_api",
-    "resolved": true
-  },
-  {
-    "fault_id": "F-2026-0408",
-    "fault_type": "LL Fault",
-    "severity": "high",
-    "component": "substation_relay_cluster",
-    "resolved": false
-  }
-]</textarea>
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3 space-y-6">
+                <div id="llmStatusBanner" class="hidden rounded-xl border border-red-700/60 bg-red-900/30 p-4 text-sm text-red-100">
+                    <div class="font-semibold">LLM Cascading Analysis Unavailable</div>
+                    <div id="llmStatusMessage" class="mt-1 text-red-200"></div>
+                </div>
+
+                <!-- Step 1: Industry Selection -->
+                <div id="step1" class="step-panel rounded-xl border border-slate-700 bg-slate-800/50 p-6 backdrop-blur-sm">
+                    <h2 class="text-2xl font-bold text-white mb-4">Select Industry Sector</h2>
+                    <p class="text-slate-400 mb-6">Choose your power system industry to begin fault analysis</p>
+                    <div id="industryGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Populated by JavaScript -->
                     </div>
                 </div>
 
-                <button id="runBtn" type="button" class="mt-5 w-full rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 px-4 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60">Run Intelligent Pipeline</button>
-                <p id="status" class="mt-3 text-sm font-semibold text-slate-700">Ready.</p>
-            </article>
-
-            <article class="animate-enterUp rounded-3xl border border-slate-200 bg-steel-900 p-5 shadow-xl" style="animation-delay: 0.14s;">
-                <h2 class="text-lg font-bold text-white">Pipeline Output</h2>
-                <p class="mt-1 text-sm text-slate-300">Explore each component independently and inspect full payload when needed.</p>
-
-                <div class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                    <div class="rounded-xl border border-emerald-300/30 bg-emerald-300/10 p-3">
-                        <p class="text-[11px] uppercase tracking-[0.18em] text-emerald-100">Risk Score</p>
-                        <p id="kpiRisk" class="mt-1 text-2xl font-extrabold text-white">--</p>
-                    </div>
-                    <div class="rounded-xl border border-amber-300/30 bg-amber-300/10 p-3">
-                        <p class="text-[11px] uppercase tracking-[0.18em] text-amber-100">Priority</p>
-                        <p id="kpiPriority" class="mt-1 text-lg font-bold text-white">--</p>
-                    </div>
-                    <div class="rounded-xl border border-sky-300/30 bg-sky-300/10 p-3">
-                        <p class="text-[11px] uppercase tracking-[0.18em] text-sky-100">Workflow</p>
-                        <p id="kpiWorkflow" class="mt-1 text-sm font-bold text-white">--</p>
+                <!-- Step 2: Machinery Selection -->
+                <div id="step2" class="step-panel hidden rounded-xl border border-slate-700 bg-slate-800/50 p-6 backdrop-blur-sm">
+                    <h2 class="text-2xl font-bold text-white mb-4">Select Machinery Type</h2>
+                    <p class="text-slate-400 mb-6">Choose equipment for fault detection</p>
+                    <div id="machineryGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Populated by JavaScript -->
                     </div>
                 </div>
 
-                <div class="mt-4 space-y-3">
-                    <details open class="rounded-2xl border border-white/20 bg-steel-800/80 p-4">
-                        <summary class="cursor-pointer text-sm font-bold uppercase tracking-[0.16em] text-emerald-200">Decision Intelligence Engine</summary>
-                        <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
-                                <p class="text-xs uppercase tracking-wide text-slate-300">Seed Component</p>
-                                <p id="decisionSeed" class="mt-1 text-sm font-semibold text-white">--</p>
-                            </div>
-                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
-                                <p class="text-xs uppercase tracking-wide text-slate-300">Severity Escalation</p>
-                                <p id="decisionSeverity" class="mt-1 text-sm font-semibold text-white">--</p>
-                            </div>
-                        </div>
-                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
-                            <p class="text-xs uppercase tracking-wide text-slate-300">Impacted Components</p>
-                            <div id="decisionImpacted" class="mt-2 flex flex-wrap gap-2"></div>
-                        </div>
-                    </details>
-
-                    <details open class="rounded-2xl border border-white/20 bg-steel-800/80 p-4">
-                        <summary class="cursor-pointer text-sm font-bold uppercase tracking-[0.16em] text-cyan-200">AI Fault Interpretation</summary>
-                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
-                            <p class="text-xs uppercase tracking-wide text-slate-300">Root Cause</p>
-                            <p id="aiRootCause" class="mt-1 text-sm leading-6 text-slate-100">--</p>
-                        </div>
-                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
-                            <p class="text-xs uppercase tracking-wide text-slate-300">Mitigation Plan</p>
-                            <ol id="aiMitigation" class="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-100"></ol>
-                        </div>
-                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
-                            <p class="text-xs uppercase tracking-wide text-slate-300">Preventive Recommendations</p>
-                            <ul id="aiPrevention" class="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-100"></ul>
-                        </div>
-                    </details>
-
-                    <details open class="rounded-2xl border border-white/20 bg-steel-800/80 p-4">
-                        <summary class="cursor-pointer text-sm font-bold uppercase tracking-[0.16em] text-amber-200">Smart Governance Layer</summary>
-                        <div class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
-                                <p class="text-xs uppercase tracking-wide text-slate-300">Workflow</p>
-                                <p id="govWorkflow" class="mt-1 text-sm font-semibold text-white">--</p>
-                            </div>
-                            <div class="rounded-xl border border-white/15 bg-white/5 p-3">
-                                <p class="text-xs uppercase tracking-wide text-slate-300">Actions</p>
-                                <p id="govActions" class="mt-1 text-sm font-semibold text-white">--</p>
-                            </div>
-                        </div>
-                        <div class="mt-3 rounded-xl border border-white/15 bg-white/5 p-3">
-                            <p class="text-xs uppercase tracking-wide text-slate-300">Notifications</p>
-                            <ul id="govNotifications" class="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-100"></ul>
-                        </div>
-                    </details>
+                <!-- Step 3: Fault Analysis -->
+                <div id="step3" class="step-panel hidden rounded-xl border border-slate-700 bg-slate-800/50 p-6 backdrop-blur-sm">
+                    <h2 class="text-2xl font-bold text-white mb-4">Fault Detection & Analysis</h2>
+                    <p class="text-slate-400 mb-6">Select a fault type to analyze impact and generate compliance report</p>
+                    <div id="faultList" class="space-y-3">
+                        <!-- Populated by JavaScript -->
+                    </div>
                 </div>
 
-                <details class="mt-4 rounded-2xl border border-white/15 bg-black/20 p-3">
-                    <summary class="cursor-pointer text-xs font-bold uppercase tracking-[0.16em] text-slate-300">Raw JSON (Debug)</summary>
-                    <pre id="output" class="mt-3 max-h-[280px] overflow-auto rounded-xl border border-white/15 bg-black/20 p-3 font-mono text-xs leading-6 text-emerald-200">{
-  "status": "No run yet"
-}</pre>
-                </details>
-            </article>
-        </section>
+                <!-- Step 4: Cascading Effects -->
+                <div id="step4" class="step-panel hidden rounded-xl border border-slate-700 bg-slate-800/50 p-6 backdrop-blur-sm">
+                    <h2 class="text-2xl font-bold text-white mb-4">⚠️ Cascading Effect Analysis</h2>
+                    <div id="cascadingVisualization" class="space-y-6">
+                        <div id="cascadeRootCause" class="rounded-lg border border-red-700/50 bg-red-900/20 p-4">
+                            <!-- Root cause details -->
+                        </div>
+                        <div id="cascadeChain" class="space-y-4">
+                            <!-- Cascade chain visualization -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Compliance Report & Alert -->
+                <div id="step5" class="step-panel hidden rounded-xl border border-slate-700 bg-slate-800/50 p-6 backdrop-blur-sm">
+                    <h2 class="text-2xl font-bold text-white mb-4">🔒 ISO 55001 Compliance Report</h2>
+                    
+                    <!-- Alert Notification -->
+                    <div id="alertNotification" class="mb-6 rounded-lg border border-red-700 bg-red-900/30 p-4 hidden">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-red-400" id="alertTitle">CRITICAL ALERT</h3>
+                                <p id="alertMessage" class="text-sm text-slate-300 mt-2">Alert message here</p>
+                                <div id="alertDetails" class="mt-3 text-xs text-slate-400 space-y-1">
+                                    <!-- Alert details populated by JS -->
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div id="alertId" class="text-xs font-mono text-slate-500">ID: --</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compliance Report -->
+                    <div id="complianceReport" class="rounded-lg border border-blue-700/50 bg-blue-900/10 p-4 space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="text-xs text-slate-400 uppercase tracking-wide">Report ID</div>
+                                <div id="reportId" class="font-mono text-sm text-white">--</div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400 uppercase tracking-wide">Standard</div>
+                                <div class="text-sm text-white">ISO 55001:2024</div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-700 pt-4">
+                            <h4 class="font-bold text-slate-300 mb-3">Asset Management Lifecycle</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-2 text-xs">
+                                <div class="rounded bg-slate-700/50 p-2">
+                                    <div class="font-semibold text-slate-300">Plan</div>
+                                    <div class="text-slate-400 text-xs mt-1">Quarterly predictive maintenance</div>
+                                </div>
+                                <div class="rounded bg-slate-700/50 p-2">
+                                    <div class="font-semibold text-slate-300">Acquire</div>
+                                    <div class="text-slate-400 text-xs mt-1">Certified vendors only</div>
+                                </div>
+                                <div class="rounded bg-slate-700/50 p-2">
+                                    <div class="font-semibold text-slate-300">Use</div>
+                                    <div class="text-slate-400 text-xs mt-1">Within design specs</div>
+                                </div>
+                                <div class="rounded bg-slate-700/50 p-2">
+                                    <div class="font-semibold text-slate-300">Maintain</div>
+                                    <div class="text-slate-400 text-xs mt-1">Per schedule</div>
+                                </div>
+                                <div class="rounded bg-slate-700/50 p-2">
+                                    <div class="font-semibold text-slate-300">Dispose</div>
+                                    <div class="text-slate-400 text-xs mt-1">Per regulations</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-700 pt-4">
+                            <h4 class="font-bold text-slate-300 mb-2">Risk Assessment & Mitigation</h4>
+                            <div id="mitigationSteps" class="space-y-2 text-sm">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-700 pt-4">
+                            <h4 class="font-bold text-slate-300 mb-2">Legal & Regulatory</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                <div>
+                                    <div class="text-xs text-slate-400">Regulatory Body</div>
+                                    <div class="text-slate-300">National Grid Authority</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-400">Compliance Requirement</div>
+                                    <div class="text-slate-300">Report within 24 hours</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3 pt-4 border-t border-slate-700">
+                            <button id="downloadReportBtn" class="flex-1 rounded-lg bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm font-semibold text-white transition">
+                                📄 Download Report
+                            </button>
+                            <button id="resetPortalBtn" class="flex-1 rounded-lg bg-slate-700 hover:bg-slate-600 px-4 py-2 text-sm font-semibold text-white transition">
+                                ↻ New Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between gap-4">
+                    <button id="prevBtn" class="rounded-lg bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-2 font-semibold text-white transition" disabled>
+                        ← Previous
+                    </button>
+                    <button id="nextBtn" class="rounded-lg bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed px-6 py-2 font-semibold text-white transition">
+                        Next →
+                    </button>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <script src="{{ url_for('static', filename='js/faultAnalysisService.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/intelligence_dashboard.js') }}"></script>
+    <script>
+        class PowerSystemPortal {
+            constructor() {
+                this.currentStep = 1;
+                this.selectedIndustry = null;
+                this.selectedMachinery = null;
+                this.selectedFault = null;
+                this.alert = null;
+                this.report = null;
+                this.cascadingData = null;
+                this.init();
+            }
+
+            async init() {
+                this.updateTime();
+                setInterval(() => this.updateTime(), 1000);
+                this.loadIndustries();
+                this.setupEventListeners();
+            }
+
+            updateTime() {
+                const now = new Date();
+                document.getElementById('currentTime').textContent = now.toLocaleString();
+            }
+
+            setupEventListeners() {
+                document.getElementById('nextBtn').addEventListener('click', () => this.nextStep());
+                document.getElementById('prevBtn').addEventListener('click', () => this.prevStep());
+                document.getElementById('downloadReportBtn').addEventListener('click', () => this.downloadReport());
+                document.getElementById('resetPortalBtn').addEventListener('click', () => this.reset());
+                
+                document.querySelectorAll('.step-indicator').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        const step = parseInt(e.currentTarget.dataset.step);
+                        if (this.canGoToStep(step)) {
+                            this.goToStep(step);
+                        }
+                    });
+                });
+            }
+
+            async loadIndustries() {
+                const industries = ['Generation', 'Transmission', 'Distribution'];
+                const grid = document.getElementById('industryGrid');
+                grid.innerHTML = '';
+
+                industries.forEach(industry => {
+                    const icons = {
+                        'Generation': '⚡',
+                        'Transmission': '🔌',
+                        'Distribution': '📡'
+                    };
+                    
+                    const btn = document.createElement('button');
+                    btn.className = 'rounded-lg border-2 border-slate-600 bg-slate-700/30 hover:border-emerald-500 hover:bg-emerald-900/20 p-6 text-center transition';
+                    btn.innerHTML = `
+                        <div class="text-4xl mb-3">${icons[industry]}</div>
+                        <div class="font-bold text-white">${industry}</div>
+                        <div class="text-xs text-slate-400 mt-2">Power System ${industry}</div>
+                    `;
+                    btn.addEventListener('click', () => this.selectIndustry(industry));
+                    grid.appendChild(btn);
+                });
+            }
+
+            async selectIndustry(industry) {
+                this.selectedIndustry = industry;
+                this.selectedMachinery = null;
+                this.selectedFault = null;
+                this.alert = null;
+                this.report = null;
+                this.cascadingData = null;
+                await this.loadMachinery(industry);
+                this.goToStep(2);
+            }
+
+            async loadMachinery(industry) {
+                try {
+                    const response = await fetch(`/api/power-system/machinery?industry=${encodeURIComponent(industry)}`);
+                    const machinery = await response.json();
+                    
+                    const grid = document.getElementById('machineryGrid');
+                    grid.innerHTML = '';
+
+                     if (!Array.isArray(machinery) || machinery.length === 0) {
+                        grid.innerHTML = '<div class="col-span-full rounded-lg border border-amber-700/50 bg-amber-900/20 p-4 text-sm text-amber-200">No machinery types found for this industry. Try another industry selection.</div>';
+                        return;
+                    }
+
+                    machinery.forEach(item => {
+                        const btn = document.createElement('button');
+                        btn.className = 'rounded-lg border-2 border-slate-600 bg-slate-700/30 hover:border-orange-500 hover:bg-orange-900/20 p-4 text-left transition';
+                        btn.innerHTML = `
+                            <div class="font-bold text-white">${item}</div>
+                            <div class="text-xs text-slate-400 mt-1">Equipment Type</div>
+                        `;
+                        btn.addEventListener('click', () => this.selectMachinery(item));
+                        grid.appendChild(btn);
+                    });
+                } catch (error) {
+                    console.error('Error loading machinery:', error);
+                    alert('Error loading machinery data');
+                }
+            }
+
+            async selectMachinery(machinery) {
+                this.selectedMachinery = machinery;
+                this.selectedFault = null;
+                this.alert = null;
+                this.report = null;
+                this.cascadingData = null;
+                await this.loadFaults(machinery);
+                this.goToStep(3);
+            }
+
+            async loadFaults(machinery) {
+                try {
+                    const response = await fetch(`/api/power-system/faults?machinery=${encodeURIComponent(machinery)}`);
+                    const faultData = await response.json();
+                    
+                    const list = document.getElementById('faultList');
+                    list.innerHTML = '';
+
+                    const faults = faultData.faults || [];
+                    faults.forEach(fault => {
+                        const severityClass = `severity-${fault.severity}`;
+                        const btn = document.createElement('button');
+                        btn.className = `w-full rounded-lg p-4 text-left transition border-l-4 ${severityClass} bg-opacity-10 hover:bg-opacity-20 border-opacity-20 hover:border-opacity-40`;
+                        btn.innerHTML = `
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <div class="font-bold text-white">${fault.type}</div>
+                                    <div class="text-xs text-slate-400 mt-1">Code: ${fault.code}</div>
+                                </div>
+                                <div class="text-xs font-semibold px-2 py-1 rounded ${severityClass} bg-opacity-30 text-white uppercase">
+                                    ${fault.severity}
+                                </div>
+                            </div>
+                        `;
+                        btn.addEventListener('click', () => this.selectFault(fault, machinery));
+                        list.appendChild(btn);
+                    });
+                } catch (error) {
+                    console.error('Error loading faults:', error);
+                    alert('Error loading fault data');
+                }
+            }
+
+            async selectFault(fault, machinery) {
+                this.selectedFault = fault;
+                this.hideLlmBanner();
+                await this.analyzeCascadingEffects(fault, machinery);
+                if (!this.cascadingData) {
+                    return;
+                }
+                await this.generateAlert(fault, machinery);
+                await this.generateComplianceReport(fault, machinery);
+                this.nextStep();
+            }
+
+            async analyzeCascadingEffects(fault, machinery) {
+                try {
+                    const response = await fetch(`/api/power-system/cascading?industry=${encodeURIComponent(this.selectedIndustry)}&machinery=${encodeURIComponent(machinery)}&fault=${encodeURIComponent(fault.type)}`);
+                    if (!response.ok) {
+                        const errorPayload = await response.json().catch(() => ({}));
+                        const message = errorPayload.error || 'LLM cascading analysis failed. Please try again.';
+                        throw new Error(message);
+                    }
+                    this.cascadingData = await response.json();
+                    this.displayCascadingVisualization();
+                } catch (error) {
+                    console.error('Error analyzing cascading effects:', error);
+                    this.cascadingData = null;
+                    this.showLlmBanner(error.message || 'LLM cascading analysis failed.');
+                }
+            }
+
+            showLlmBanner(message) {
+                const banner = document.getElementById('llmStatusBanner');
+                const messageEl = document.getElementById('llmStatusMessage');
+                const normalized = (message || '').toLowerCase();
+
+                if (normalized.includes('missing gemini_api_key')) {
+                    messageEl.textContent = 'Missing GEMINI_API_KEY in server environment. Set the key and restart the app to enable LLM-generated cascading effects.';
+                } else {
+                    messageEl.textContent = message || 'LLM cascading analysis failed. Please retry.';
+                }
+
+                banner.classList.remove('hidden');
+            }
+
+            hideLlmBanner() {
+                document.getElementById('llmStatusBanner').classList.add('hidden');
+                document.getElementById('llmStatusMessage').textContent = '';
+            }
+
+            displayCascadingVisualization() {
+                const root = document.getElementById('cascadeRootCause');
+                const chain = document.getElementById('cascadeChain');
+                
+                root.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-xs text-slate-400 uppercase">Root Cause</div>
+                            <div class="text-lg font-bold text-red-400">${this.cascadingData.root_cause.fault}</div>
+                            <div class="text-sm text-slate-300 mt-1">${this.cascadingData.root_cause.machinery} (${this.cascadingData.root_cause.industry})</div>
+                            <div class="text-sm text-slate-200 mt-3 leading-6">${this.cascadingData.root_cause.explanation || 'No LLM explanation returned.'}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-xs text-slate-400">Severity</div>
+                            <div class="text-lg font-bold capitalize text-${this.getSeverityColor(this.cascadingData.root_cause.severity)}">${this.cascadingData.root_cause.severity}</div>
+                        </div>
+                    </div>
+                `;
+
+                chain.innerHTML = '';
+                if (this.cascadingData.cascading_effects.length > 0) {
+                    const title = document.createElement('div');
+                    title.className = 'font-bold text-slate-300 mb-3';
+                    title.textContent = `⚠️ ${this.cascadingData.total_affected_systems - 1} System(s) At Risk`;
+                    chain.appendChild(title);
+
+                    this.cascadingData.cascading_effects.forEach((effect, idx) => {
+                        const effect_div = document.createElement('div');
+                        effect_div.className = 'rounded-lg border border-slate-600 bg-slate-700/30 p-3 cascade-node';
+                        effect_div.innerHTML = `
+                            <div class="flex items-center justify-between mb-2">
+                                <div>
+                                    <div class="text-xs text-slate-400">Level ${effect.level} Impact</div>
+                                    <div class="font-semibold text-white">${effect.affected_machinery}</div>
+                                </div>
+                                <div class="text-xs font-semibold px-2 py-1 rounded severity-${effect.cascade_risk} bg-opacity-30">
+                                    ${effect.cascade_risk.toUpperCase()}
+                                </div>
+                            </div>
+                            <div class="text-xs text-slate-400">Possible faults: ${effect.possible_faults.join(', ')}</div>
+                            <div class="text-sm text-slate-200 mt-2 leading-6">${effect.cascade_explanation || 'No LLM explanation returned for this cascade level.'}</div>
+                        `;
+                        chain.appendChild(effect_div);
+                    });
+
+                    if (this.cascadingData.systemic_impact_summary) {
+                        const summary = document.createElement('div');
+                        summary.className = 'rounded-lg border border-slate-600 bg-slate-700/20 p-3 text-sm text-slate-200 leading-6';
+                        summary.innerHTML = `<span class="font-semibold text-slate-100">Systemic Impact:</span> ${this.cascadingData.systemic_impact_summary}`;
+                        chain.appendChild(summary);
+                    }
+                } else {
+                    const no_cascade = document.createElement('div');
+                    no_cascade.className = 'rounded-lg border border-green-700/50 bg-green-900/10 p-4 text-center';
+                    no_cascade.innerHTML = '<div class="text-green-400 font-semibold">✓ No cascading effects detected</div>';
+                    chain.appendChild(no_cascade);
+                }
+            }
+
+            getSeverityColor(severity) {
+                const colors = {
+                    'critical': 'red-400',
+                    'high': 'orange-400',
+                    'medium': 'yellow-400',
+                    'low': 'green-400'
+                };
+                return colors[severity] || 'slate-400';
+            }
+
+            async generateAlert(fault, machinery) {
+                try {
+                    const response = await fetch('/api/power-system/alert', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            industry: this.selectedIndustry,
+                            machinery: machinery,
+                            fault_type: fault.type,
+                            fault_code: fault.code,
+                            confidence: 95
+                        })
+                    });
+                    this.alert = await response.json();
+                    this.displayAlert();
+                } catch (error) {
+                    console.error('Error generating alert:', error);
+                }
+            }
+
+            displayAlert() {
+                const alertDiv = document.getElementById('alertNotification');
+                const alertSummary = document.getElementById('alertSummary');
+                
+                alertDiv.classList.remove('hidden');
+                alertDiv.style.borderColor = this.getSeverityBorderColor(this.alert.alert_level);
+                
+                document.getElementById('alertTitle').textContent = `${this.alert.alert_level} - ${this.alert.fault_code}`;
+                document.getElementById('alertMessage').textContent = this.alert.message;
+                document.getElementById('alertId').textContent = `ID: ${this.alert.alert_id}`;
+                
+                const details = document.getElementById('alertDetails');
+                details.innerHTML = `
+                    <div><strong>Confidence:</strong> ${this.alert.confidence}%</div>
+                    <div><strong>Recommended Action:</strong> ${this.alert.recommended_action}</div>
+                    <div><strong>Estimated Impact:</strong> ${this.alert.estimated_impact}</div>
+                `;
+
+                // Update sidebar alert summary
+                const alertSummaryContent = document.getElementById('alertSummaryContent');
+                alertSummaryContent.innerHTML = `
+                    <div><strong>${this.alert.alert_id}</strong></div>
+                    <div>${this.alert.fault_code}</div>
+                    <div class="mt-1 text-red-400">${this.alert.alert_level}</div>
+                `;
+                alertSummary.classList.remove('hidden');
+            }
+
+            getSeverityBorderColor(level) {
+                const colors = {
+                    'CRITICAL': '#dc2626',
+                    'HIGH': '#ea580c',
+                    'MEDIUM': '#eab308',
+                    'LOW': '#16a34a'
+                };
+                return colors[level] || '#64748b';
+            }
+
+            async generateComplianceReport(fault, machinery) {
+                try {
+                    const response = await fetch('/api/power-system/compliance-report', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            industry: this.selectedIndustry,
+                            machinery: machinery,
+                            fault_type: fault.type,
+                            alert_id: this.alert.alert_id
+                        })
+                    });
+                    this.report = await response.json();
+                    this.displayComplianceReport();
+                } catch (error) {
+                    console.error('Error generating report:', error);
+                }
+            }
+
+            displayComplianceReport() {
+                document.getElementById('reportId').textContent = this.report.report_id;
+                
+                const mitigationSteps = document.getElementById('mitigationSteps');
+                mitigationSteps.innerHTML = this.report.risk_assessment.mitigation_steps
+                    .map((step, idx) => `
+                        <div class="flex gap-2">
+                            <div class="font-bold text-slate-400">${idx + 1}.</div>
+                            <div class="text-slate-300">${step}</div>
+                        </div>
+                    `).join('');
+            }
+
+            downloadReport() {
+                if (!this.report) return;
+                
+                const reportText = `
+ISO 55001 COMPLIANCE INCIDENT REPORT
+=====================================
+
+Report ID: ${this.report.report_id}
+Date: ${this.report.report_date}
+Compliance Standard: ${this.report.compliance_standard}
+
+--- INCIDENT DETAILS ---
+Alert ID: ${this.alert.alert_id}
+Industry: ${this.selectedIndustry}
+Equipment: ${this.selectedMachinery}
+Fault Type: ${this.selectedFault.type}
+Confidence: ${this.alert.confidence}%
+
+--- ASSET MANAGEMENT LIFECYCLE ---
+Plan: ${this.report.asset_management_lifecycle.plan}
+Acquire: ${this.report.asset_management_lifecycle.acquire}
+Use: ${this.report.asset_management_lifecycle.use}
+Maintain: ${this.report.asset_management_lifecycle.maintain}
+Dispose: ${this.report.asset_management_lifecycle.dispose}
+
+--- RISK ASSESSMENT ---
+Risk Level: ${this.report.risk_assessment.risk_level}
+Mitigation Required: ${this.report.risk_assessment.mitigation_required}
+
+Mitigation Steps:
+${this.report.risk_assessment.mitigation_steps.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+
+--- COMPLIANCE STATUS ---
+Incident Logged: ${this.report.documentation.incident_logged}
+Records Updated: ${this.report.documentation.maintenance_record_updated}
+Status: ${this.report.documentation.compliance_status}
+Next Review: ${this.report.documentation.next_review_date}
+
+--- LEGAL & REGULATORY ---
+Regulatory Body: ${this.report.legal_and_regulatory.regulatory_body}
+Requirement: ${this.report.legal_and_regulatory.compliance_requirement}
+Penalties: ${this.report.legal_and_regulatory.penalties_for_non_compliance}
+
+=====================================
+Generated: ${new Date().toLocaleString()}
+                `;
+
+                const blob = new Blob([reportText], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ISO-55001-Report-${this.report.report_id}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            }
+
+            nextStep() {
+                if (this.currentStep < 5 && this.canAdvance()) {
+                    this.goToStep(this.currentStep + 1);
+                }
+            }
+
+            prevStep() {
+                if (this.currentStep > 1) {
+                    this.goToStep(this.currentStep - 1);
+                }
+            }
+
+            goToStep(step) {
+                if (!this.canGoToStep(step)) return;
+                
+                document.querySelectorAll('.step-panel').forEach(p => p.classList.add('hidden'));
+                document.getElementById(`step${step}`).classList.remove('hidden');
+                
+                document.querySelectorAll('.step-indicator').forEach(i => {
+                    i.classList.remove('completed');
+                    i.classList.add('border-slate-600/50', 'bg-slate-700/30');
+                    i.classList.remove('border-green-700/50', 'bg-green-900/20');
+                });
+                
+                for (let i = 1; i < step; i++) {
+                    const indicator = document.querySelector(`[data-step="${i}"]`);
+                    indicator.classList.add('completed');
+                    indicator.classList.remove('border-slate-600/50', 'bg-slate-700/30');
+                    indicator.classList.add('border-green-700/50', 'bg-green-900/20');
+                }
+
+                document.getElementById('prevBtn').disabled = step === 1;
+                document.getElementById('nextBtn').disabled = !this.canAdvance() || step === 5;
+                document.getElementById('nextBtn').textContent = step === 4 ? 'Generate Report →' : 'Next →';
+                
+                this.currentStep = step;
+            }
+
+            canAdvance() {
+                switch (this.currentStep) {
+                    case 1: return this.selectedIndustry !== null;
+                    case 2: return this.selectedMachinery !== null;
+                    case 3: return this.selectedFault !== null;
+                    case 4: return this.cascadingData !== null;
+                    default: return true;
+                }
+            }
+
+            canGoToStep(step) {
+                if (step <= this.currentStep) {
+                    return true;
+                }
+
+                switch (step) {
+                    case 2:
+                        return this.selectedIndustry !== null;
+                    case 3:
+                        return this.selectedMachinery !== null;
+                    case 4:
+                        return this.selectedFault !== null;
+                    case 5:
+                        return this.cascadingData !== null && this.alert !== null && this.report !== null;
+                    default:
+                        return false;
+                }
+            }
+
+            reset() {
+                this.currentStep = 1;
+                this.selectedIndustry = null;
+                this.selectedMachinery = null;
+                this.selectedFault = null;
+                this.alert = null;
+                this.report = null;
+                this.cascadingData = null;
+                
+                document.getElementById('alertSummary').classList.add('hidden');
+                this.hideLlmBanner();
+                this.loadIndustries();
+                this.goToStep(1);
+            }
+        }
+
+        // Initialize portal when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new PowerSystemPortal();
+        });
+    </script>
 </body>
 </html>
