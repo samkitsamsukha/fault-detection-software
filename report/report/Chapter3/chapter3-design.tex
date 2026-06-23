@@ -1,7 +1,7 @@
 
 \chapter{System Design and Architecture for Intelligent Fault Detection and Predictive Governance}
 
-Designing an intelligent fault detection system for power transmission lines requires careful consideration of real-time constraints, system scalability, and decision-making capabilities. The system must process high-frequency sensor data, accurately classify faults, and provide meaningful insights for operators. This chapter presents the design specifications, modeling choices, and architecture of the proposed multi-layered system. It also details the methodology and design considerations involved in integrating embedded machine learning, decision intelligence, and generative AI.
+Designing an intelligent fault detection system for power transmission lines requires careful consideration of real-time constraints, system scalability, and decision-making capabilities. The system must process high-frequency sensor data, accurately classify faults, and provide meaningful insights for operators. This chapter presents the design specifications, model selection rationale, and architecture of the proposed multi-layered system. It also details the methodology and design considerations involved in integrating embedded machine learning, decision intelligence, and generative AI.
 
 \section{Specifications for the Design}
 
@@ -10,45 +10,66 @@ The system is designed with the following specifications:
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Input: Real-time voltage and current sensor data from transmission lines
-\item Output: Fault classification, risk score, and AI-generated insights
-\item Model: Decision Tree for embedded real-time inference
-\item Processing: Edge-based inference using embedded systems (Raspberry Pi)
-\item Intelligence: Decision Engine for cascading analysis and Llama 3 for interpretation
-\item Robustness: Ability to handle noisy sensor data and varying load conditions
-\item Evaluation: Performance measured using classification accuracy, latency, and system reliability
+\item \textbf{Input:} Real-time three-phase voltage ($V_a$, $V_b$, $V_c$) and current ($I_a$, $I_b$, $I_c$) sensor data from transmission lines
+\item \textbf{Output:} Fault class (LG / LL / LLG / LLL / No Fault), risk score (0--100), priority level (P1--P4), and AI-generated natural language insights
+\item \textbf{Embedded Model:} Decision Tree for real-time inference; target accuracy $> 95\%$, latency $< 100$~ms
+\item \textbf{Processing Platform:} Raspberry Pi with MCP3008 ADC for edge-based real-time inference
+\item \textbf{Intelligence Layer:} Graph-based Decision Intelligence Engine for cascade analysis; Llama 3.3-70b via Groq API for natural language interpretation
+\item \textbf{Robustness:} Rule-based pre-screening of zero-current conditions to handle sensor noise reliably before ML inference
+\item \textbf{Evaluation:} Classification accuracy per fault type, detection latency, risk score distribution, and AI response time
 \end{itemize}
 
 \section{Pre-analysis and Model Selection}
 
-The design begins with evaluating traditional fault detection methods and machine learning models. While complex models such as Random Forest and Neural Networks offer high accuracy, they are not suitable for embedded deployment due to computational overhead.
+The design begins by evaluating candidate machine learning models for embedded fault classification. The key requirement is that the model must achieve greater than 95\% accuracy while remaining deployable on a Raspberry Pi without a hardware accelerator. Table~\ref{c3:tab:model_comparison} summarizes the tradeoffs between candidate models.
 
-Decision Trees are selected as the primary model due to their low computational complexity, fast inference suitable for real-time applications, and high interpretability.
-To enhance system capabilities beyond classification, the following components are incorporated:
+\begin{table}[H]
+\centering
+\fontsize{10}{12}\selectfont
+\begin{tabular}{|p{3.5cm}|p{2.2cm}|p{2.2cm}|p{2.2cm}|p{2.5cm}|}
+\hline
+\textbf{Model} & \textbf{Accuracy} & \textbf{Inference Latency} & \textbf{Memory Footprint} & \textbf{Embedded Suitability} \\
+\hline
+Decision Tree & $\sim$96\% & $<$ 5 ms & Low ($<$ 1 MB) & Excellent \\
+\hline
+Random Forest & 97--99\% \cite{Anwar2025} & 50--200 ms & High (50--500 MB) & Poor \\
+\hline
+Neural Network (MLP) & 95--98\% & 20--100 ms & High (10--100 MB) & Moderate \\
+\hline
+LSTM / Deep Learning & 99\% \cite{LSTM2023} & 100--500 ms & Very High & Poor \\
+\hline
+SVM & 92--97\% & 10--50 ms & Moderate & Moderate \\
+\hline
+\end{tabular}
+\caption{Comparison of candidate machine learning models for embedded fault classification}
+\label{c3:tab:model_comparison}
+\end{table}
+
+Decision Trees are selected as the primary model due to their sub-millisecond inference on Raspberry Pi hardware, compact serialized model size, and directly interpretable structure that aligns with XAI requirements \cite{CNNDecisionTree2026}. To enhance system capabilities beyond classification, the following intelligence layers are incorporated:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Embedded ML for real-time fault detection
-\item Decision Intelligence Engine for cascading effect analysis
-\item Generative AI (Llama 3) for fault interpretation and mitigation
+\item Embedded ML for real-time fault detection and classification
+\item Decision Intelligence Engine for graph-based cascading effect analysis and risk scoring
+\item Generative AI (Llama 3.3-70b) for fault interpretation and mitigation planning
 \item Smart Governance Layer for automated alerts and policy enforcement
 \end{itemize}
 
-This results in a hybrid architecture combining edge intelligence with AI-driven reasoning.
+This results in a hybrid architecture combining edge intelligence with cloud-assisted AI reasoning.
 
 \section{Design Methodology}
 
 The proposed system follows a multi-stage intelligent pipeline:
 
 \begin{enumerate}
-\item \textbf{Data Acquisition:} Voltage and current sensors continuously capture real-time transmission line data
-\item \textbf{Signal Processing:} Analog signals are converted into digital form using ADC modules and preprocessed for noise reduction
-\item \textbf{Fault Classification:} A Decision Tree model deployed on embedded hardware classifies faults in real time
-\item \textbf{Decision Intelligence:} The system analyzes grid dependencies, evaluates cascading effects, and assigns risk scores
-\item \textbf{AI Interpretation:} Llama 3 processes fault data to generate root cause analysis and mitigation strategies
-\item \textbf{Governance and Automation:} Alerts, escalation workflows, and policy-driven responses are triggered automatically
-\item \textbf{Visualization:} A web-based dashboard displays real-time data, insights, and system status
+\item \textbf{Data Acquisition:} ZMPT101B voltage and ACS712 current sensors continuously sample all three phases; analog signals are digitized by the MCP3008 10-bit ADC
+\item \textbf{Signal Processing:} A zero-current pre-screening rule ($I < 0.3$~A) first identifies clearly zero-current phases before invoking the ML model, reducing misclassification from sensor noise
+\item \textbf{Fault Classification:} The Decision Tree model classifies the six-dimensional feature vector into one of five fault classes in real time
+\item \textbf{Decision Intelligence:} The BFS-based cascade engine traverses the system dependency graph, computes impacted components and cascade depth, and assigns a risk score and priority level
+\item \textbf{AI Interpretation:} Llama 3.3-70b processes the fault context to generate root cause analysis and mitigation strategies in natural language
+\item \textbf{Governance and Automation:} The Smart Governance Layer evaluates risk thresholds and triggers log-only, admin notification, or full mitigation orchestration workflows accordingly
+\item \textbf{Visualization:} A React-based web dashboard displays real-time sensor data, fault history, risk scores, and AI-generated insights
 \end{enumerate}
 
 This structured pipeline ensures both fast detection and intelligent decision-making.
@@ -67,18 +88,32 @@ This structured pipeline ensures both fast detection and intelligent decision-ma
 	\label{fig:data_pipeline}
 \end{figure}
 
+\section{System Architecture}
+
+The overall system is structured into five layers:
+
+\textbf{Layer 1 — Sensor and Acquisition:} ZMPT101B voltage sensors and ACS712 current sensors measure three-phase electrical parameters. The MCP3008 ADC digitizes the analog signals at the Raspberry Pi GPIO interface.
+
+\textbf{Layer 2 — Embedded Inference:} A pre-trained Decision Tree model, serialized using Python's joblib library, performs fault classification on the Raspberry Pi. A zero-current rule-based pre-filter handles clear-cut cases before invoking the model, achieving 96--98\% confidence on rule-matched events.
+
+\textbf{Layer 3 — Decision Intelligence:} The fault output, severity estimate, and model confidence are fed to the Decision Intelligence Engine. A directed dependency graph of 16 system components is traversed via BFS to identify cascading reach and compute a numerical risk score.
+
+\textbf{Layer 4 — AI and Governance:} The Groq API endpoint receives a structured fault context payload. The Llama 3.3-70b model returns a JSON-formatted analysis. The Smart Governance Layer evaluates the risk score against policy thresholds (medium: 45, high: 80) and executes the appropriate workflow.
+
+\textbf{Layer 5 — Presentation:} A Flask backend exposes REST API endpoints for prediction, history retrieval, chat, decision intelligence, fault analysis, governance evaluation, and compliance reporting. A React frontend consumes these endpoints to render the real-time monitoring dashboard.
+
 \section{Experimental Techniques}
 
-The system is developed and evaluated using:
+The system was developed and evaluated using:
 \begin{itemize}
-\item Real-time data acquisition from sensors under normal and fault conditions
-\item Simulation of faults using controlled switching and variable loads
-\item Training and testing of the Decision Tree model on labeled datasets
-\item Evaluation of system latency and real-time performance
-\item Validation of AI-generated insights and decision engine outputs
-\item Comparison between traditional detection and intelligent system outputs
+\item Real-time data acquisition from ZMPT101B and ACS712 sensors under normal and simulated fault conditions on a laboratory transmission line model
+\item Controlled fault injection by switching phase loads and shorting conductors to generate all four fault types
+\item Training the Decision Tree classifier on a labelled voltage-current dataset covering the five fault classes, with an 80/20 train-test split
+\item Measurement of end-to-end pipeline latency under continuous real-time operation
+\item Validation of AI-generated insights for factual consistency with the injected fault type
+\item Performance comparison between the rule-based pre-filter, the standalone Decision Tree, and the full intelligent pipeline
 \end{itemize}
 
 \section{Summary}
 
-This chapter presented the design and architecture of the proposed intelligent fault detection and predictive governance system. It outlined the specifications, model selection, and methodology used to build a multi-layered pipeline combining embedded machine learning, decision intelligence, and generative AI. These design principles guide the implementation and evaluation discussed in the next chapter.
+This chapter presented the design and architecture of the proposed intelligent fault detection and predictive governance system. The model selection rationale, grounded in an accuracy-latency-resource tradeoff analysis, justifies the use of Decision Trees for embedded inference. The five-layer architecture cleanly separates sensing, classification, impact analysis, AI reasoning, and operator presentation. These design principles directly guide the implementation described in the next chapter.

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.4)  8 MAY 2026 00:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.4)  24 JUN 2026 00:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**./IDP_report.tex
-(IDP_report.tex
+**./IDP_Report.tex
+(IDP_Report.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Program Files\MiKTeX\tex/latex/base\book.cls
@@ -423,14 +423,93 @@ Package: afterpage 2023/07/04 v1.08 After-Page Package (DPC)
 \c@numtitlelines=\count331
 \titlelines=\count332
 )
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip71
+
+For additional information on amsmath, use the `?' option.
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks34
+\ex@=\dimen259
+))
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen260
+)
+(C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count333
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count334
+\leftroot@=\count335
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count336
+\DOTSCASE@=\count337
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box66
+\strutbox@=\box67
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen261
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count338
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count339
+\dotsspace@=\muskip17
+\c@parentequation=\count340
+\dspbrk@lvl=\count341
+\tag@help=\toks35
+\row@=\count342
+\column@=\count343
+\maxfields@=\count344
+\andhelp@=\toks36
+\eqnshift@=\dimen262
+\alignsep@=\dimen263
+\tagshift@=\dimen264
+\tagwidth@=\dimen265
+\totwidth@=\dimen266
+\lineht@=\dimen267
+\@envbody=\toks37
+\multlinegap=\skip72
+\multlinetaggap=\skip73
+\mathdisplay@stack=\toks38
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+)
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/enumitem\enumitem.sty
 Package: enumitem 2025/02/06 v3.11 Customized lists
-\labelindent=\skip71
-\enit@outerparindent=\dimen259
-\enit@toks=\toks34
-\enit@inbox=\box66
-\enit@count@id=\count333
-\enitdp@description=\count334
+\labelindent=\skip74
+\enit@outerparindent=\dimen268
+\enit@toks=\toks39
+\enit@inbox=\box68
+\enit@count@id=\count345
+\enitdp@description=\count346
 )
 (C:\Program Files\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibra
 rycalc.code.tex
@@ -445,45 +524,45 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (C:\Program Files\MiKTeX\tex/generic/iftex\iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ))
-\Gm@cnth=\count335
-\Gm@cntv=\count336
-\c@Gm@tempcnt=\count337
-\Gm@bindingoffset=\dimen260
-\Gm@wd@mp=\dimen261
-\Gm@odd@mp=\dimen262
-\Gm@even@mp=\dimen263
-\Gm@layoutwidth=\dimen264
-\Gm@layoutheight=\dimen265
-\Gm@layouthoffset=\dimen266
-\Gm@layoutvoffset=\dimen267
-\Gm@dimlist=\toks35
+\Gm@cnth=\count347
+\Gm@cntv=\count348
+\c@Gm@tempcnt=\count349
+\Gm@bindingoffset=\dimen269
+\Gm@wd@mp=\dimen270
+\Gm@odd@mp=\dimen271
+\Gm@even@mp=\dimen272
+\Gm@layoutwidth=\dimen273
+\Gm@layoutheight=\dimen274
+\Gm@layouthoffset=\dimen275
+\Gm@layoutvoffset=\dimen276
+\Gm@dimlist=\toks40
 
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/geometry\geometry.cfg))
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count338
-\float@exts=\toks36
-\float@box=\box67
-\@float@everytoks=\toks37
-\@floatcapt=\box68
+\c@float@type=\count350
+\float@exts=\toks41
+\float@box=\box69
+\@float@everytoks=\toks42
+\@floatcapt=\box70
 )
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/caption\caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/caption\caption3.sty
 Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen268
-\captionmargin=\dimen269
-\caption@leftmargin=\dimen270
-\caption@rightmargin=\dimen271
-\caption@width=\dimen272
-\caption@indent=\dimen273
-\caption@parindent=\dimen274
-\caption@hangindent=\dimen275
+\caption@tempdima=\dimen277
+\captionmargin=\dimen278
+\caption@leftmargin=\dimen279
+\caption@rightmargin=\dimen280
+\caption@width=\dimen281
+\caption@indent=\dimen282
+\caption@parindent=\dimen283
+\caption@hangindent=\dimen284
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count339
-\c@continuedfloat=\count340
+\c@caption@flags=\count351
+\c@continuedfloat=\count352
 Package caption Info: float package is loaded.
 )
 (C:\Program Files\MiKTeX\tex/latex/hyperref\hyperref.sty
@@ -527,18 +606,18 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/kvoptions\kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count341
+\c@section@level=\count353
 ) (C:\Program Files\MiKTeX\tex/latex/etoolbox\etoolbox.sty
 Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count342
+\etb@tempcnta=\count354
 )
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/generic/stringenc\stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
-\@linkdim=\dimen276
-\Hy@linkcounter=\count343
-\Hy@pagecounter=\count344
+\@linkdim=\dimen285
+\Hy@linkcounter=\count355
+\Hy@pagecounter=\count356
 
 (C:\Program Files\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
@@ -548,7 +627,7 @@ Now handling font encoding PD1 ...
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count345
+\Hy@SavedSpaceFactor=\count357
 
 (C:\Program Files\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
@@ -562,14 +641,14 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count346
+\c@Hy@tempcnt=\count358
 
 (C:\Program Files\MiKTeX\tex/latex/url\url.sty
-\Urlmuskip=\muskip17
+\Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4801.
-\XeTeXLinkMargin=\dimen277
+\XeTeXLinkMargin=\dimen286
 
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -578,9 +657,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count347
-\Field@Width=\dimen278
-\Fld@charsize=\dimen279
+\Fld@menulength=\count359
+\Field@Width=\dimen287
+\Fld@charsize=\dimen288
 Package hyperref Info: Hyper figures OFF on input line 6078.
 Package hyperref Info: Link nesting OFF on input line 6083.
 Package hyperref Info: Hyper index ON on input line 6086.
@@ -588,15 +667,15 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count348
-\c@Item=\count349
-\c@Hfootnote=\count350
+\Hy@abspage=\count360
+\c@Item=\count361
+\c@Hfootnote=\count362
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 (C:\Program Files\MiKTeX\tex/latex/hyperref\hpdftex.def
 File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count351
-\c@bookmark@seq@number=\count352
+\Fld@listcount=\count363
+\c@bookmark@seq@number=\count364
 
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.
 sty
@@ -609,89 +688,21 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 84.
 )
-\Hy@SectionHShift=\skip72
+\Hy@SectionHShift=\skip75
 )
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/glossaries/base\glossaries.sty
 Package: glossaries 2026/04/21 v5.1 (NLCT)
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/mfirstuc\mfirstuc.sty
 Package: mfirstuc 2025/04/03 v2.09 (NLCT)
-\@glsmfirst=\toks38
-\@glsmrest=\toks39
+\@glsmfirst=\toks43
+\@glsmrest=\toks44
 )
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/xfor\xfor.sty
 Package: xfor 2009/02/05 v1.05 (NLCT)
 )
-(C:\Program Files\MiKTeX\tex/latex/amsmath\amsgen.sty
-File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks40
-\ex@=\dimen280
-)
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/datatool\datatool-base.sty
 Package: datatool-base 2025/12/04 v3.4.3 (NLCT)
 
-(C:\Program Files\MiKTeX\tex/latex/amsmath\amsmath.sty
-Package: amsmath 2025/07/09 v2.17z AMS math features
-\@mathmargin=\skip73
-
-For additional information on amsmath, use the `?' option.
-(C:\Program Files\MiKTeX\tex/latex/amsmath\amstext.sty
-Package: amstext 2024/11/17 v2.01 AMS text
-)
-(C:\Program Files\MiKTeX\tex/latex/amsmath\amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen281
-)
-(C:\Program Files\MiKTeX\tex/latex/amsmath\amsopn.sty
-Package: amsopn 2022/04/08 v2.04 operator names
-)
-\inf@bad=\count353
-LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count354
-\leftroot@=\count355
-LaTeX Info: Redefining \overline on input line 398.
-LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count356
-\DOTSCASE@=\count357
-LaTeX Info: Redefining \ldots on input line 495.
-LaTeX Info: Redefining \dots on input line 498.
-LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box69
-\strutbox@=\box70
-LaTeX Info: Redefining \big on input line 721.
-LaTeX Info: Redefining \Big on input line 722.
-LaTeX Info: Redefining \bigg on input line 723.
-LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen282
-LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count358
-LaTeX Info: Redefining \bmod on input line 904.
-LaTeX Info: Redefining \pmod on input line 909.
-LaTeX Info: Redefining \smash on input line 939.
-LaTeX Info: Redefining \relbar on input line 969.
-LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count359
-\dotsspace@=\muskip18
-\c@parentequation=\count360
-\dspbrk@lvl=\count361
-\tag@help=\toks41
-\row@=\count362
-\column@=\count363
-\maxfields@=\count364
-\andhelp@=\toks42
-\eqnshift@=\dimen283
-\alignsep@=\dimen284
-\tagshift@=\dimen285
-\tagwidth@=\dimen286
-\totwidth@=\dimen287
-\lineht@=\dimen288
-\@envbody=\toks43
-\multlinegap=\skip74
-\multlinetaggap=\skip75
-\mathdisplay@stack=\toks44
-LaTeX Info: Redefining \[ on input line 2950.
-LaTeX Info: Redefining \] on input line 2951.
-)
 (C:\Users\Admin\AppData\Roaming\MiKTeX\tex/latex/tracklang\tracklang.sty
 Package: tracklang 2025/03/11 v1.6.6 (NLCT) Track Languages
 
@@ -921,14 +932,14 @@ Package: setspace 2022/12/04 v6.7b set line spacing
 )
 \glswrite=\write4
 \glo@main@file=\write5
-\openout5 = `IDP_report.glo'.
+\openout5 = `IDP_Report.glo'.
 
-Package glossaries Info: Writing glossary file IDP_report.glo on input line 48.
+Package glossaries Info: Writing glossary file IDP_Report.glo on input line 48.
 
 \glo@symbolList@file=\write6
-\openout6 = `IDP_report.sym2'.
+\openout6 = `IDP_Report.sym2'.
 
-Package glossaries Info: Writing glossary file IDP_report.sym2 on input line 48
+Package glossaries Info: Writing glossary file IDP_Report.sym2 on input line 48
 .
 
 (AuxFiles/Glossaries.tex)
@@ -1200,9 +1211,11 @@ Package: blx-case-expl3 2025/07/10 v3.21 expl3 case changing code for biblatex
 \@quotelevel=\count538
 \@quotereset=\count539
 
-(IDP_report.aux <Reading QR code for "" at level 1-H from aux file.>
+(IDP_Report.aux
+<Reading QR code for "https://drive.google.com/drive/folders/1UkpcZa9u5ac5G2pdf
+vkrMMU15G-g4xBn?usp=sharing" at level 5-M from aux file.>
 )
-\openout1 = `IDP_report.aux'.
+\openout1 = `IDP_Report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
@@ -1291,9 +1304,9 @@ Package caption Info: supertabular package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring OFF on input line 62.
 
-(IDP_report.out) (IDP_report.out)
+(IDP_Report.out) (IDP_Report.out)
 \@outlinefile=\write8
-\openout8 = `IDP_report.out'.
+\openout8 = `IDP_Report.out'.
 
 \c@lstlisting=\count546
 Package biblatex Info: Trying to load language 'english'...
@@ -1308,44 +1321,50 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Data encoding 'utf8' specified.
 (biblatex)             No need to reencode data.
-\openout7 = `IDP_report-blx.bib'.
+\openout7 = `IDP_Report-blx.bib'.
 
 Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'IDP_report.bbl' found.
- (IDP_report.bbl)
+Package biblatex Info: ... file 'IDP_Report.bbl' found.
+ (IDP_Report.bbl)
 Package biblatex Info: Reference section=0 on input line 62.
 Package biblatex Info: Reference segment=0 on input line 62.
 
 
 
-<QR code requested for "" in version 0-M.>
-<Error-correction level increased from M to H at no cost.>
+<QR code requested for "https://drive.google.com/drive/folders/1UkpcZa9u5ac5G2p
+dfvkrMMU15G-g4xBn?usp=sharing" in version 0-M.>
 
-Package hyperref Warning: Suppressing link with empty target on input line 65.
+<Copying the QR code for "https://drive.google.com/drive/folders/1UkpcZa9u5ac5G
+2pdfvkrMMU15G-g4xBn?usp=sharing" in version 5-M as previously calculated.>
+LaTeX Font Info:    Trying to load font information for U+msa on input line 65.
 
-<Copying the QR code for "" in version 1-H as previously calculated.>
-<Figures/RV_newLogo.png, id=222, 916.1728pt x 161.10187pt>
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 65.
+
+
+(C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+<Figures/RV_newLogo.png, id=227, 916.1728pt x 161.10187pt>
 File: Figures/RV_newLogo.png Graphic file (type png)
 <use Figures/RV_newLogo.png>
 Package pdftex.def Info: Figures/RV_newLogo.png  used on input line 65.
 (pdftex.def)             Requested size: 452.9679pt x 79.65102pt.
-[1
+ [1
 
-\openout4 = `IDP_report.ist'.
+\openout4 = `IDP_Report.ist'.
 
 
 {C:/Users/Admin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Figures/RV
-_newLogo.png>] (CoverPages/Certificate.tex
-<Figures/RV_logoVec.png, id=234, 505.89pt x 496.85625pt>
+_newLogo.png>]
+(CoverPages/Certificate.tex
+<Figures/RV_logoVec.png, id=239, 505.89pt x 496.85625pt>
 File: Figures/RV_logoVec.png Graphic file (type png)
 <use Figures/RV_logoVec.png>
 Package pdftex.def Info: Figures/RV_logoVec.png  used on input line 13.
 (pdftex.def)             Requested size: 113.81102pt x 111.77266pt.
-
-Overfull \hbox (47.99307pt too wide) in paragraph at lines 73--86
- [][] 
- []
-
 
 Overfull \hbox (4.2409pt too wide) in paragraph at lines 108--118
  [][] 
@@ -1358,7 +1377,7 @@ been already used, duplicate ignored
                    \relax 
 l.71 \newpage
              
-<Figures/RVlogoVecW.png, id=235, 505.89pt x 496.85625pt>
+<Figures/RVlogoVecW.png, id=240, 505.89pt x 496.85625pt>
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 71.
@@ -1437,7 +1456,7 @@ Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 81.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
  [1
 
-] (IDP_report.toc
+] (IDP_Report.toc
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 26.
@@ -1448,9 +1467,18 @@ Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 26.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
  [2
 
-])
+]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 55.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 55.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [3])
 \tf@toc=\write9
-\openout9 = `IDP_report.toc'.
+\openout9 = `IDP_Report.toc'.
 
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1460,19 +1488,10 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 89.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [3]
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 89.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 89.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
  [4]
-(IDP_report.lof)
+(IDP_Report.lof)
 \tf@lof=\write10
-\openout10 = `IDP_report.lof'.
+\openout10 = `IDP_Report.lof'.
 
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1485,13 +1504,13 @@ Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 95.
  [5
 
 
-] (IDP_report.lot)
+] (IDP_Report.lot)
 \tf@lot=\write11
-\openout11 = `IDP_report.lot'.
+\openout11 = `IDP_Report.lot'.
 
 
-No file IDP_report.gls.
-No file IDP_report.sym1.
+No file IDP_Report.gls.
+No file IDP_Report.sym1.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 105.
@@ -1529,47 +1548,55 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.17 O
-      ther research has focused on fault localization using regression model...
+l.16 
+     
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 17.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 16.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 17.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 16.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[2]
-Overfull \hbox (2.33987pt too wide) in paragraph at lines 21--22
-[]\OT1/cmr/m/n/12 Overall, ex-ist-ing work lacks a uni-fied sys-tem that com-bi
-nes real-time de-tec-tion, system-
- []
-
-
+ [2]
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.42 \item T
-            o develop an AI-based system for real-time fault detection and c...
+l.30 
+     
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 42.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 30.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 42.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 30.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[3]
+ [3]
+Overfull \hbox (15.91751pt too wide) in paragraph at lines 35--36
+[]\OT1/cmr/m/n/12 Traditional trans-mis-sion line mon-i-tor-ing sys-tems rely o
+n man-ual ob-ser-va-tion or threshold-
+ []
+
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 64.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 49.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 64.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 49.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [4]) (Chapter2/chapter2-Funda.tex
+[4]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 67.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 67.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [5]) (Chapter2/chapter2-Funda.tex
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
@@ -1578,7 +1605,7 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [5]
+ [6]
 Chapter 2.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1588,46 +1615,64 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[6
+[7
 
 
 ]
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 27.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 19.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 27.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [7]
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 57.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 57.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 19.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
  [8]
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 93.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 44.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 93.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 44.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [9]) (Chapter3/chapter3-design.tex
+ [9]
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 2.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 66.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 2.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 66.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
  [10]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 96.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 96.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [11]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 123.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 123.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [12]) (Chapter3/chapter3-design.tex
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 2.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 2.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [13]
 Chapter 3.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1637,48 +1682,85 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 2.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[11
+[14
 
 
 ]
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 32.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 25.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 32.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 25.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [12]
-<Figures/pipeline_process.png, id=406, 2302.10063pt x 979.40906pt>
+ [15]
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]\OT1/cmr/bx/n/10 Inference
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+[]\OT1/cmr/bx/n/10 Memory
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--32
+[]\OT1/cmr/bx/n/10 Embedded
+ []
+
+
+Underfull \hbox (badness 2020) in paragraph at lines 35--35
+[]\OT1/cmr/m/n/10 High (50--500
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--37
+[]\OT1/cmr/m/n/10 Neural Net-work
+ []
+
+
+Underfull \hbox (badness 2020) in paragraph at lines 37--37
+[]\OT1/cmr/m/n/10 High (10--100
+ []
+
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 68.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 68.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+[16]
+<Figures/pipeline_process.png, id=501, 2302.10063pt x 979.40906pt>
 File: Figures/pipeline_process.png Graphic file (type png)
 <use Figures/pipeline_process.png>
-Package pdftex.def Info: Figures/pipeline_process.png  used on input line 58.
+Package pdftex.def Info: Figures/pipeline_process.png  used on input line 79.
 (pdftex.def)             Requested size: 452.9679pt x 192.71008pt.
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 62.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 62.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [13]
-<Figures/hardware_pipeline.png, id=418, 1413.28pt x 770.88pt>
+<Figures/hardware_pipeline.png, id=502, 1413.28pt x 770.88pt>
 File: Figures/hardware_pipeline.png Graphic file (type png)
 <use Figures/hardware_pipeline.png>
-Package pdftex.def Info: Figures/hardware_pipeline.png  used on input line 65.
+Package pdftex.def Info: Figures/hardware_pipeline.png  used on input line 86.
 (pdftex.def)             Requested size: 452.9679pt x 247.07481pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 79.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 90.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 79.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 90.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [14 <./Figures/pipeline_process.png> <./Figures/hardware_pipeline.png>]) (Chap
-ter4/chapter4-implement.tex
+ [17 <./Figures/pipeline_process.png>]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 104.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 104.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [18 <./Figures/hardware_pipeline.png>]) (Chapter4/chapter4-implement.tex
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
@@ -1687,7 +1769,7 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [15]
+ [19]
 Chapter 4.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1697,52 +1779,129 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[16
+[20
 
 
 ]
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 25.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 34.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 25.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 34.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [17]
+ [21]
+<Figures/Circuit Setup.png, id=531, 512.66531pt x 382.42876pt>
+File: Figures/Circuit Setup.png Graphic file (type png)
+<use Figures/Circuit Setup.png>
+Package pdftex.def Info: Figures/Circuit Setup.png  used on input line 37.
+(pdftex.def)             Requested size: 385.02547pt x 287.21765pt.
+
+Overfull \hbox (68.45865pt too wide) in paragraph at lines 46--47
+[]\OT1/cmr/m/n/12 The trained model was se-ri-al-ized us-ing Python's \OT1/cmtt
+/m/n/12 joblib \OT1/cmr/m/n/12 li-brary (\OT1/cmtt/m/n/12 decision[]tree[]fault
+[]model.pkl\OT1/cmr/m/n/12 )
+ []
+
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 69.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 55.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 69.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 55.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [18]
-<Figures/system_architecture.png, id=444, 1699.34875pt x 932.48375pt>
+[22 <./Figures/Circuit Setup.png>]
+Overfull \hbox (17.66989pt too wide) in paragraph at lines 63--63
+[]\OT1/cmr/bx/n/17.28 Real-Time Data Ac-qui-si-tion and In-fer-ence Pipeline 
+ []
+
+\g__tcobox_out_iow=\write12
+\openout12 = `IDP_Report.listing'.
+
+(C:\Program Files\MiKTeX\tex/latex/listings\lstlang1.sty
+File: lstlang1.sty 2025/11/14 1.11b listings language file
+) (IDP_Report.listing
+Overfull \hbox (3.97028pt too wide) in paragraph at lines 2--3
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][] 
+ []
+
+)
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 94.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 94.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [23]
+\openout12 = `IDP_Report.listing'.
+
+ (IDP_Report.listing)
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 130.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 130.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [24]
+<Figures/Visuals-AI Chatbot.png, id=573, 642.14906pt x 412.54124pt>
+File: Figures/Visuals-AI Chatbot.png Graphic file (type png)
+<use Figures/Visuals-AI Chatbot.png>
+Package pdftex.def Info: Figures/Visuals-AI Chatbot.png  used on input line 133
+.
+(pdftex.def)             Requested size: 385.02547pt x 247.36299pt.
+<Figures/Visuals-Power System Intelligence.png, id=574, 968.11688pt x 506.6428p
+t>
+File: Figures/Visuals-Power System Intelligence.png Graphic file (type png)
+<use Figures/Visuals-Power System Intelligence.png>
+Package pdftex.def Info: Figures/Visuals-Power System Intelligence.png  used on
+ input line 154.
+(pdftex.def)             Requested size: 407.66833pt x 213.34514pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 158.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 158.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [25 <./Figures/Visuals-AI Chatbot.png>]
+Overfull \hbox (20.41637pt too wide) in paragraph at lines 161--162
+[]\OT1/cmr/m/n/12 The end-to-end in-tel-li-gent re-sponse pipeline, ex-posed at
+ the \OT1/cmtt/m/n/12 /api/intelligent-response
+ []
+
+<Figures/system_architecture.png, id=583, 1699.34875pt x 932.48375pt>
 File: Figures/system_architecture.png Graphic file (type png)
 <use Figures/system_architecture.png>
-Package pdftex.def Info: Figures/system_architecture.png  used on input line 10
-7.
+Package pdftex.def Info: Figures/system_architecture.png  used on input line 17
+8.
 (pdftex.def)             Requested size: 407.66833pt x 223.68684pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 111.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 182.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 111.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 182.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [19]) (Chapter5/chapter5-result.tex
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+[26 <./Figures/Visuals-Power System Intelligence.png>])
+(Chapter5/chapter5-result.tex
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [20 <./Figures/system_architecture.png (PNG copy)>]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [27 <./Figures/system_architecture.png (PNG copy)>]
 Chapter 5.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1752,64 +1911,147 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[21
+[28
 
 
 ]
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 37.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-File: Figures/RVlogoVecW.png Graphic file (type png)
-<use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 37.
-(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [22]
-Underfull \hbox (badness 1354) in paragraph at lines 79--79
-[]\OT1/cmr/m/n/10 Baseline Fault De-tec-tion (ML
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]\OT1/cmr/bx/n/10 Detection Ac-
  []
 
 
-Underfull \hbox (badness 5696) in paragraph at lines 81--82
-[]\OT1/cmr/m/n/10 Low (Near Real-
+Underfull \hbox (badness 1881) in paragraph at lines 31--32
+[]\OT1/cmr/m/n/10 Highest ac-cu-racy; three-phase zero-
  []
 
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 89.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 41.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 89.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 41.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[23]
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
-[]\OT1/cmr/bx/n/10 Intelligence
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+[]\OT1/cmr/m/n/10 96.9% (weighted
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 103--104
-[]\OT1/cmr/m/n/10 Moderate (De-vel-
+Underfull \hbox (badness 7613) in paragraph at lines 59--60
+[]\OT1/cmr/m/n/10 Groq API round-trip in-clud-ing
  []
 
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 138.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 73.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 138.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 73.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[24]
+[30]
+<Figures/Visuals-Dashboard.png, id=622, 1157.82562pt x 645.16031pt>
+File: Figures/Visuals-Dashboard.png Graphic file (type png)
+<use Figures/Visuals-Dashboard.png>
+Package pdftex.def Info: Figures/Visuals-Dashboard.png  used on input line 76.
+(pdftex.def)             Requested size: 452.9679pt x 252.39905pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]\OT1/cmr/m/n/10 Baseline (ML-Only De-ci-sion
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+[]\OT1/cmr/m/n/10 Classification +
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+\OT1/cmr/m/n/10 u-ral Lan-guage
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+\OT1/cmr/m/n/10 Ex-pla-na-tion +
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+\OT1/cmr/m/n/10 Gov-er-nance Au-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+[]\OT1/cmr/m/n/10 60--100 ms
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
+[]\OT1/cmr/m/n/10 Threshold-only; no
+ []
+
+
+Underfull \hbox (badness 4193) in paragraph at lines 116--116
+[]\OT1/cmr/m/n/10 ML-Only (Lit-er-a-ture avg.)
+ []
+
+
+Underfull \hbox (badness 1281) in paragraph at lines 118--119
+[]\OT1/cmr/m/n/10 Classification + edge
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]\OT1/cmr/m/n/10 Ensemble ML
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--122
+[]\OT1/cmr/m/n/10 8--12 ms
+ []
+
+
+Underfull \hbox (badness 1253) in paragraph at lines 122--123
+[]\OT1/cmr/m/n/10 Classification + Cas-
+ []
+
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 170.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 127.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 170.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 127.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [25]) (Chapter6/chapter6-conclution.tex
+[31 <./Figures/Visuals-Dashboard.png>]
+<Figures/Visuals-Cascading Dependencies and Compliance Report.png, id=635, 975.
+645pt x 622.57594pt>
+File: Figures/Visuals-Cascading Dependencies and Compliance Report.png Graphic 
+file (type png)
+<use Figures/Visuals-Cascading Dependencies and Compliance Report.png>
+Package pdftex.def Info: Figures/Visuals-Cascading Dependencies and Compliance 
+Report.png  used on input line 133.
+(pdftex.def)             Requested size: 452.9679pt x 289.04832pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 137.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 137.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [32]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 162.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 162.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [33 <./Figures/Visuals-Cascading Dependencies and Compliance Report.png>]) (Ch
+apter6/chapter6-conclution.tex
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
@@ -1818,7 +2060,17 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [26]
+
+[34]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [35]
 Chapter 6.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1828,19 +2080,33 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[27
+[36
 
 
 ]
+Overfull \hbox (9.17155pt too wide) in paragraph at lines 11--12
+\OT1/cmr/m/n/12 trained on six-dimensional three-phase voltage-current fea-ture
+s ($\OML/cmm/m/it/12 V[]; V[]; V[]; I[]; I[]; I[]$\OT1/cmr/m/n/12 ) achieves
+ []
+
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 16.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 20.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
-Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 16.
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 20.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [28]) (Appendix/Apndx.tex
+[37]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 36.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 36.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [38]) (Appendix/Apndx.tex
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
@@ -1849,7 +2115,7 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
- [29]
+ [39]
 Appendix A.
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
@@ -1859,19 +2125,85 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 1.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[30
+[40
 
 
 ]
-\g__tcobox_out_iow=\write12
-\openout12 = `IDP_report.listing'.
+\openout12 = `IDP_Report.listing'.
 
- (C:\Program Files\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2025/11/14 1.11b listings language file
+ (IDP_Report.listing
+Overfull \hbox (52.25977pt too wide) in paragraph at lines 1--2
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][][][] 
+ []
+
 )
-(C:\Program Files\MiKTeX\tex/latex/listings\lstlang2.sty
-File: lstlang2.sty 2025/11/14 1.11b listings language file
-) (IDP_report.listing))
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 54.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 54.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [41]
+\openout12 = `IDP_Report.listing'.
+
+ (IDP_Report.listing
+Overfull \hbox (38.46277pt too wide) in paragraph at lines 2--3
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+[][][] 
+ []
+
+
+Overfull \hbox (17.76727pt too wide) in paragraph at lines 15--16
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (24.66577pt too wide) in paragraph at lines 26--27
+[][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+)
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 102.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 102.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [42]
+Overfull \hbox (82.71051pt too wide) in paragraph at lines 106--107
+[]\OT1/cmr/m/n/12 The fol-low-ing list-ing presents the gov-er-nance work-flow 
+re-solver from \OT1/cmtt/m/n/12 services/smart[]governance.py\OT1/cmr/m/n/12 ,
+ []
+
+\openout12 = `IDP_Report.listing'.
+
+(IDP_Report.listing
+Underfull \hbox (badness 10000) in paragraph at lines 4--5
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
+ []
+
+
+Overfull \hbox (17.76727pt too wide) in paragraph at lines 5--7
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+)
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 127.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 127.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [43])
 File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 120.
@@ -1880,47 +2212,83 @@ File: Figures/RVlogoVecW.png Graphic file (type png)
 <use Figures/RVlogoVecW.png>
 Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 120.
 (pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
-[31]
+ [44]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 125.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 125.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [45
 
-LaTeX Warning: Empty bibliography on input line 125.
 
-(IDP_report.aux <Reading QR code for "" at level 1-H from aux file.>
+
+]
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 128.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+File: Figures/RVlogoVecW.png Graphic file (type png)
+<use Figures/RVlogoVecW.png>
+Package pdftex.def Info: Figures/RVlogoVecW.png  used on input line 128.
+(pdftex.def)             Requested size: 271.7835pt x 266.93372pt.
+ [46] (IDP_Report.aux
+<Reading QR code for "https://drive.google.com/drive/folders/1UkpcZa9u5ac5G2pdf
+vkrMMU15G-g4xBn?usp=sharing" at level 5-M from aux file.>
 )
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-Package rerunfilecheck Info: File `IDP_report.out' has not changed.
-(rerunfilecheck)             Checksum: 2BE169E53B7BC317CEBD01E31C559419;10556.
-Package logreq Info: Writing requests to 'IDP_report.run.xml'.
-\openout1 = `IDP_report.run.xml'.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package rerunfilecheck Info: File `IDP_Report.out' has not changed.
+(rerunfilecheck)             Checksum: D9211073FB2C86C05D5C4D9D69B54CBE;11418.
+
+Package biblatex Warning: Please (re)run BibTeX on the file(s):
+(biblatex)                IDP_Report
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'IDP_Report.run.xml'.
+\openout1 = `IDP_Report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 46275 strings out of 467871
- 932602 string characters out of 5428444
- 1781230 words of memory out of 5000000
- 74364 multiletter control sequences out of 15000+600000
- 640517 words of font info for 84 fonts, out of 8000000 for 9000
+ 47356 strings out of 467871
+ 951585 string characters out of 5428444
+ 1852090 words of memory out of 5000000
+ 75284 multiletter control sequences out of 15000+600000
+ 644461 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 104i,16n,121p,2540b,2131s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 104i,16n,121p,2540b,2520s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Admin\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1200.pk> <C:\Users\Admin\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
 0\tcbx1095.pk> <C:\Users\Admin\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
 /dpi600\tcrm1095.pk><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmb
 x10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/
 Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program Fi
-les/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmssbx10.
-pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
-ram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Program Files/MiKTeX/fonts/t
-ype1/public/amsfonts/cm/cmtt12.pfb>
-Output written on IDP_report.pdf (41 pages, 3292219 bytes).
+les/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfo
+nts/cm/cmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8
+.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Prog
+ram Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmssbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mti12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C
+:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Program Fi
+les/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on IDP_Report.pdf (56 pages, 6705060 bytes).
 PDF statistics:
- 641 PDF objects out of 1000 (max. 8388607)
- 152 named destinations out of 1000 (max. 500000)
- 475 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 956 PDF objects out of 1000 (max. 8388607)
+ 288 named destinations out of 1000 (max. 500000)
+ 508 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -16,5 +16,436 @@
   {}
 \endgroup
 
-\datalist[entry]{none/global//global/global/global}\enddatalist
+\datalist[entry]{none/global//global/global/global}
+  \entry{Zhang2025}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=ZY}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Yiming},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=XY}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Yue},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=CL}{%
+         family={Cui},
+         familyi={C\bibinitperiod},
+         given={Lin},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Tsinghua University Press}%
+    }
+    \strng{namehash}{ZY+1}
+    \strng{fullhash}{ZYXYCL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.26599/IJCS.2024.9100016
+    \endverb
+    \field{number}{2}
+    \field{pages}{139\bibrangedash 146}
+    \field{title}{Survey on {AI}-Assisted Power Transmission Line Fault
+  Detection}
+    \field{volume}{9}
+    \field{journaltitle}{International Journal of Crowd Science}
+    \field{year}{2025}
+  \endentry
+
+  \entry{EnergyInformatics2025}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=ME}{%
+         family={Mahdi},
+         familyi={M\bibinitperiod},
+         given={Emad},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=AA}{%
+         family={Almutairi},
+         familyi={A\bibinitperiod},
+         given={Abdulaziz},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=ASS}{%
+         family={Al-Sager},
+         familyi={A\bibinithyphendelim S\bibinitperiod},
+         given={Saleh},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Nature}%
+    }
+    \strng{namehash}{ME+1}
+    \strng{fullhash}{MEAAASS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1186/s42162-025-00574-w
+    \endverb
+    \field{number}{1}
+    \field{pages}{47}
+    \field{title}{Application of machine learning in power grid fault detection
+  and maintenance}
+    \field{volume}{8}
+    \field{journaltitle}{Energy Informatics}
+    \field{year}{2025}
+  \endentry
+
+  \entry{Anwar2025}{article}{}{}
+    \name{author}{7}{}{%
+      {{hash=AT}{%
+         family={Anwar},
+         familyi={A\bibinitperiod},
+         given={Tahir},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=MC}{%
+         family={Mu},
+         familyi={M\bibinitperiod},
+         given={Chaoxu},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=YMZ}{%
+         family={Yousaf},
+         familyi={Y\bibinitperiod},
+         given={Muhammad\bibnamedelima Zain},
+         giveni={M\bibinitperiod\bibinitdelim Z\bibinitperiod},
+      }}%
+      {{hash=KW}{%
+         family={Khan},
+         familyi={K\bibinitperiod},
+         given={Wajid},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=KS}{%
+         family={Khalid},
+         familyi={K\bibinitperiod},
+         given={Saqib},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=HAO}{%
+         family={Hourani},
+         familyi={H\bibinitperiod},
+         given={Ahmad\bibnamedelima O.},
+         giveni={A\bibinitperiod\bibinitdelim O\bibinitperiod},
+      }}%
+      {{hash=ZI}{%
+         family={Zaitsev},
+         familyi={Z\bibinitperiod},
+         given={Ievgen},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Nature Publishing Group}%
+    }
+    \strng{namehash}{AT+1}
+    \strng{fullhash}{ATMCYMZKWKSHAOZI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1038/s41598-025-86554-2
+    \endverb
+    \field{pages}{2549}
+    \field{title}{Robust fault detection and classification in power
+  transmission lines via ensemble machine learning models}
+    \field{volume}{15}
+    \field{journaltitle}{Scientific Reports}
+    \field{year}{2025}
+  \endentry
+
+  \entry{CNN2D2024}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=SM}{%
+         family={Shafiullah},
+         familyi={S\bibinitperiod},
+         given={Md},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=AMA}{%
+         family={Abido},
+         familyi={A\bibinitperiod},
+         given={Mohammed\bibnamedelima A.},
+         giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=ASA}{%
+         family={Al-Shamma'a},
+         familyi={A\bibinithyphendelim S\bibinitperiod},
+         given={Abdullahi},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MDPI}%
+    }
+    \strng{namehash}{SM+1}
+    \strng{fullhash}{SMAMAASA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{19}
+    \field{pages}{6289}
+    \field{title}{{2D}-convolutional neural network based fault detection and
+  classification of transmission lines using scalogram images}
+    \field{volume}{24}
+    \field{journaltitle}{Sensors}
+    \field{year}{2024}
+  \endentry
+
+  \entry{LSTM2023}{inproceedings}{}{}
+    \name{author}{3}{}{%
+      {{hash=GA}{%
+         family={Garg},
+         familyi={G\bibinitperiod},
+         given={Ashish},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=SR}{%
+         family={Singh},
+         familyi={S\bibinitperiod},
+         given={Ranjit},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=GP}{%
+         family={Gupta},
+         familyi={G\bibinitperiod},
+         given={Prakash},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{GA+1}
+    \strng{fullhash}{GASRGP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2023 IEEE International Conference on Power Electronics,
+  Smart Grid and Renewable Energy (PESGRE)}
+    \verb{doi}
+    \verb 10.1109/PESGRE52268.2023.9808029
+    \endverb
+    \field{pages}{1\bibrangedash 6}
+    \field{title}{Transmission Line Fault Detection and Classification Using
+  Deep Learning Neural Network}
+    \field{year}{2023}
+  \endentry
+
+  \entry{CNNDecisionTree2026}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=KS}{%
+         family={Khan},
+         familyi={K\bibinitperiod},
+         given={Sohail},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=MK}{%
+         family={Mehmood},
+         familyi={M\bibinitperiod},
+         given={Khurram},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=UA}{%
+         family={Ullah},
+         familyi={U\bibinitperiod},
+         given={Ata},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AZ}{%
+         family={Ali},
+         familyi={A\bibinitperiod},
+         given={Zulfiqar},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Nature Publishing Group}%
+    }
+    \strng{namehash}{KS+1}
+    \strng{fullhash}{KSMKUAAZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1038/s41598-026-45514-0
+    \endverb
+    \field{pages}{4521}
+    \field{title}{Hybrid {CNN}-decision tree framework for efficient
+  transmission line fault detection and classification: an {XAI}-based
+  approach}
+    \field{volume}{16}
+    \field{journaltitle}{Scientific Reports}
+    \field{year}{2026}
+  \endentry
+
+  \entry{EdgeML2024}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=AA}{%
+         family={Alsaedi},
+         familyi={A\bibinitperiod},
+         given={Abdullah},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=ASN}{%
+         family={Al-Shammari},
+         familyi={A\bibinithyphendelim S\bibinitperiod},
+         given={Nabil},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=AHM}{%
+         family={Al-Harthi},
+         familyi={A\bibinithyphendelim H\bibinitperiod},
+         given={Maged},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {MDPI}%
+    }
+    \strng{namehash}{AA+1}
+    \strng{fullhash}{AAASNAHM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.3390/a19040299
+    \endverb
+    \field{number}{4}
+    \field{pages}{299}
+    \field{title}{Robust Deep Learning for Multiclass Power System Fault
+  Diagnosis Using Edge Deployment}
+    \field{volume}{19}
+    \field{journaltitle}{Algorithms}
+    \field{year}{2024}
+  \endentry
+
+  \entry{PMUEnsemble2024}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=ATS}{%
+         family={Abdelgayed},
+         familyi={A\bibinitperiod},
+         given={T.\bibnamedelima S.},
+         giveni={T\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=MWG}{%
+         family={Morsi},
+         familyi={M\bibinitperiod},
+         given={W.\bibnamedelima G.},
+         giveni={W\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=STS}{%
+         family={Sidhu},
+         familyi={S\bibinitperiod},
+         given={T.\bibnamedelima S.},
+         giveni={T\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Frontiers Media}%
+    }
+    \strng{namehash}{ATS+1}
+    \strng{fullhash}{ATSMWGSTS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.3389/fenrg.2024.1352610
+    \endverb
+    \field{pages}{1352610}
+    \field{title}{Ensemble learning based transmission line fault
+  classification using phasor measurement unit ({PMU}) data with explainable
+  {AI} ({XAI})}
+    \field{volume}{12}
+    \field{journaltitle}{Frontiers in Energy Research}
+    \field{year}{2024}
+  \endentry
+
+  \entry{HybridCascade2025}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=LW}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Wei},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=CX}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Xin},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=WJ}{%
+         family={Wang},
+         familyi={W\bibinitperiod},
+         given={Jianhua},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZF}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Fang},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Nature Publishing Group}%
+    }
+    \strng{namehash}{LW+1}
+    \strng{fullhash}{LWCXWJZF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1038/s41598-025-10304-7
+    \endverb
+    \field{pages}{8934}
+    \field{title}{Hybrid learning-based fault prediction and cascading failure
+  mitigation in multi-network energy systems}
+    \field{volume}{15}
+    \field{journaltitle}{Scientific Reports}
+    \field{year}{2025}
+  \endentry
+
+  \entry{BPASTS2025}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=WP}{%
+         family={Wróblewski},
+         familyi={W\bibinitperiod},
+         given={Piotr},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=KM}{%
+         family={Kowalski},
+         familyi={K\bibinitperiod},
+         given={Marcin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=NT}{%
+         family={Nowak},
+         familyi={N\bibinitperiod},
+         given={Tomasz},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Polish Academy of Sciences}%
+    }
+    \strng{namehash}{WP+1}
+    \strng{fullhash}{WPKMNT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.24425/bpasts.2025.4693
+    \endverb
+    \field{number}{2}
+    \field{pages}{4693}
+    \field{title}{Machine learning-based fault detection in transmission lines:
+  {A} comparative study with random search optimization}
+    \field{volume}{73}
+    \field{journaltitle}{Bulletin of the Polish Academy of Sciences: Technical
+  Sciences}
+    \field{year}{2025}
+  \endentry
+\enddatalist
 \endinput

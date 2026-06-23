@@ -1,113 +1,142 @@
 \chapter{Fundamentals of Intelligent Fault Detection and Predictive Governance Systems}
 
-Modern power systems are rapidly evolving into complex, interconnected networks that require intelligent monitoring and decision-making capabilities. Traditional fault detection systems are no longer sufficient to handle dynamic grid conditions and cascading failures. Understanding the foundational concepts of electrical fault detection, embedded machine learning, decision intelligence, and generative AI is essential for designing advanced smart grid systems.
+Modern power systems are rapidly evolving into complex, interconnected networks that require intelligent monitoring and decision-making capabilities. Traditional fault detection systems are no longer sufficient to handle dynamic grid conditions and cascading failures. Understanding the foundational concepts of electrical fault detection, embedded machine learning, decision intelligence, and generative AI is essential for designing advanced smart grid systems \cite{EnergyInformatics2025}.
 
-This chapter presents the core concepts required for the project, including transmission line fault fundamentals, machine learning models for real-time classification, system-wide decision intelligence, and AI-driven reasoning. It also introduces the tools and technologies used for implementation, providing a foundation for the system architecture discussed in the next chapter.
+This chapter presents the core concepts required for the project, including transmission line fault fundamentals, machine learning models for real-time classification, decision intelligence for cascading analysis, and AI-driven reasoning. It also introduces the tools and technologies used for implementation, providing a foundation for the system architecture discussed in the next chapter.
 
 \section{Transmission Line Fault Fundamentals}
 
-Transmission lines are critical components of the power system, responsible for delivering electricity over long distances. Faults in these lines can occur due to environmental conditions, insulation failure, equipment malfunction, or sudden load variations.
+Transmission lines are critical components of the power system, responsible for delivering electricity over long distances at high voltage levels. Faults in these lines can occur due to environmental conditions (lightning, wind, ice), insulation failure, equipment malfunction, or sudden load variations. Faults are broadly classified as symmetrical (affecting all three phases equally) and unsymmetrical (affecting one or two phases) \cite{Zhang2025}.
 
-Common types of faults include:
+The four standard fault types encountered in three-phase transmission systems are:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Single Line-to-Ground (L-G) faults
-\item Line-to-Line (L-L) faults
-\item Double Line-to-Ground (L-L-G) faults
-\item Three-phase faults
+\item \textbf{Single Line-to-Ground (LG):} The most common fault type ($\approx$70\% of all faults), where one phase conductor contacts ground. It causes asymmetric current increase in the faulted phase and a corresponding voltage drop.
+\item \textbf{Line-to-Line (LL):} Two phase conductors come into contact, producing a large circulating current between them without ground involvement. Represents approximately 15--20\% of transmission faults.
+\item \textbf{Double Line-to-Ground (LLG):} Two phase conductors simultaneously contact ground, combining line-to-line and ground fault effects. This is a severe asymmetrical fault producing high fault currents in two phases.
+\item \textbf{Three-Phase (LLL):} All three phases are simultaneously short-circuited. This is the most severe fault type (representing roughly 5\% of faults) and produces the largest symmetrical fault current.
 \end{itemize}
 
-These faults result in abnormal voltage and current patterns, which can be detected using sensors. Rapid identification is essential to prevent equipment damage, reduce downtime, and maintain grid stability.
+Each fault type produces a characteristic signature in the three-phase voltage and current waveforms. Under normal operation, voltages $V_a$, $V_b$, $V_c$ remain balanced near rated levels and currents $I_a$, $I_b$, $I_c$ remain symmetric. Fault conditions cause phase imbalances that can be detected and classified through analysis of these six electrical parameters \cite{Anwar2025}.
 
 \section{Real-Time Fault Detection using Embedded Systems}
 
-Modern fault detection systems use embedded hardware such as microcontrollers (e.g., ESP32 or Raspberry Pi) to process real-time sensor data. Voltage and current sensors continuously monitor line conditions, and analog signals are converted into digital data using ADC modules.
+Modern fault detection systems use embedded hardware to process real-time sensor data at the point of measurement, eliminating the latency of centralized cloud processing. For this project, a Raspberry Pi serves as the edge computing node. Voltage and current sensors continuously monitor line conditions, and analog signals are converted to digital data using the MCP3008 10-bit Analog-to-Digital Converter (ADC) \cite{EdgeML2024}.
 
-Embedded systems enable:
+Embedded systems provide:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Low-latency data processing
-\item Continuous real-time monitoring
-\item Deployment of lightweight machine learning models
+\item Low-latency data processing with classification latency below 100~ms
+\item Continuous real-time monitoring without dependence on cloud connectivity
+\item Deployment of lightweight machine learning models within RAM and CPU constraints
+\item Reduced data transmission overhead by processing data locally
 \end{itemize}
 
-This approach ensures faster response compared to centralized systems and reduces dependency on high-latency cloud processing.
+The ZMPT101B voltage transformer module provides galvanically isolated AC voltage measurement with a linearity error below 1\%. The ACS712 Hall-effect current sensor provides non-invasive current measurement with sensitivity of 66~mV/A (20A version), suitable for monitoring industrial-scale phase currents. Sampled at the ADC output, the six-dimensional feature vector $X = [V_a, V_b, V_c, I_a, I_b, I_c]$ is constructed for each measurement cycle.
 
 \section{Machine Learning for Fault Classification}
 
-Machine learning models are used to classify faults based on patterns in voltage and current data. Among various models, Decision Trees are widely used for embedded systems due to their simplicity, interpretability, and low computational requirements.
+Machine learning models classify faults by learning discriminative patterns in the voltage-current feature space. Decision Trees have been widely adopted for embedded fault classification due to their interpretability, low inference latency, and compact memory footprint \cite{EnergyInformatics2025,BPASTS2025}.
 
-The classification process involves training on labeled voltage-current datasets, learning patterns associated with different fault types, and performing real-time inference on incoming sensor data.
+A Decision Tree recursively partitions the feature space using axis-aligned thresholds. At each internal node, a splitting criterion selects the feature $X_i$ and threshold $\theta$ that maximizes information gain. The Gini impurity criterion used during training is defined as:
 
-Decision Trees provide fast and reliable predictions, making them suitable for deployment on resource-constrained devices.
+\begin{equation}
+G(S) = 1 - \sum_{k=1}^{K} p_k^2
+\end{equation}
+
+where $S$ is the set of training samples at a node, $K$ is the number of fault classes, and $p_k$ is the proportion of samples belonging to class $k$. A split is chosen to minimize the weighted sum of child node impurities. The resulting tree is a sequence of threshold comparisons:
+
+\begin{equation}
+\text{Classify}(X) = \text{leaf node reached by traversing} \ X_i \leq \theta_j \ \text{decisions}
+\end{equation}
+
+This produces a classification rule that can be evaluated in $O(\text{depth})$ time, typically achieving sub-millisecond inference on embedded hardware.
+
+While ensemble methods such as Random Forest and gradient boosting achieve higher accuracy in literature (97--99.96\% \cite{Anwar2025}), their computational cost makes them impractical for deployment on a single-board computer without dedicated hardware accelerators. Decision Trees offer a favorable tradeoff, achieving greater than 95\% accuracy at classification latencies well under 100~ms on a Raspberry Pi \cite{EdgeML2024}.
+
 \section{Decision Intelligence in Power Systems}
 
-While fault detection identifies the type of fault, it does not provide insight into its broader impact. Decision Intelligence extends this capability by analyzing system-wide dependencies and predicting cascading effects.
+Fault detection identifies the type and location of a fault but does not provide insight into its broader system impact. Decision Intelligence extends this capability by modeling grid dependencies as a directed graph and simulating fault propagation using Breadth-First Search (BFS) \cite{HybridCascade2025}.
 
-Decision Intelligence involves modeling grid interdependencies, evaluating cascading failures across connected nodes, assigning risk scores based on severity and impact, and supporting decision-making for fault mitigation.
+The dependency graph $G = (V, E)$ represents system components as vertices $V$ and their operational dependencies as directed edges $E$. When a fault is detected at seed component $v_0$, BFS traverses the graph to identify all components reachable from $v_0$, yielding the set of impacted components $C$ and the maximum propagation depth $d_{\max}$.
 
-This layer transforms the system from reactive monitoring to proactive analysis and planning.
+A risk score $R \in [0, 100]$ is computed as:
+
+\begin{equation}
+R = \alpha \cdot S_{\text{base}} + \beta \cdot S_{\text{esc}} + \gamma \cdot |C| + \delta \cdot d_{\max} + \epsilon \cdot \text{conf} + \kappa \cdot \mathbb{1}[\text{cascade}]
+\end{equation}
+
+where $S_{\text{base}}$ and $S_{\text{esc}}$ are the numeric encodings of base and escalated severities, $|C|$ is the impacted component count, $d_{\max}$ is the cascade depth, $\text{conf}$ is the model confidence, and $\kappa$ is a binary cascade penalty. The risk score maps to four priority levels: P1 Critical ($R \geq 85$), P2 High ($R \geq 65$), P3 Medium ($R \geq 40$), and P4 Low ($R < 40$).
+
 \section{Generative AI for Fault Interpretation}
 
-Generative AI models, such as Llama 3, enable advanced reasoning capabilities in the system. These models process fault data and generate human-readable explanations, root cause analysis, and mitigation strategies.
+Generative AI models enable contextual reasoning over fault data, translating technical sensor readings and classification outputs into natural language explanations accessible to non-specialist operators \cite{CNNDecisionTree2026}.
 
-Capabilities include:
+The Llama 3.3-70b model accessed through the Groq inference API is used in this system. When a fault is detected, the model receives a structured JSON payload containing fault type, severity, affected components, cascade analysis, and recent fault history. It returns:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Natural language interpretation of faults
-\item Root cause identification based on historical and real-time data
-\item Step-by-step mitigation recommendations
-\item Interactive querying for operators
+\item A root cause explanation grounded in the fault data
+\item A step-by-step mitigation plan for field operators
+\item Preventive recommendations to reduce recurrence probability
+\item Confidence notes qualifying the analysis
 \end{itemize}
 
-This allows operators to quickly understand complex fault scenarios and take informed actions.
+The use of a large language model for this task is appropriate because the analysis requires synthesizing multiple heterogeneous inputs (sensor data, system topology, historical records) and generating context-sensitive, actionable text. Structured JSON prompting with strict output schema enforcement minimizes hallucination risk in the generated recommendations.
 
 \section{Smart Governance and Automation}
 
-Smart Governance introduces automation into the system by enforcing policies and triggering actions based on predefined conditions.
+Smart Governance introduces policy-driven automation into the fault response workflow. Rather than requiring manual triage for every event, the governance layer evaluates the computed risk score against configurable thresholds and triggers appropriate workflows automatically \cite{EnergyInformatics2025}.
 
-Smart Governance includes automated alerts and notifications, escalation workflows based on fault severity, policy-driven responses for critical conditions, and logging and reporting for compliance and analysis.
+Three escalation tiers are defined:
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\item \textbf{Log Only:} Risk score below medium threshold (default: 45). Event is recorded to the audit log for compliance and trend analysis.
+\item \textbf{Notify Admin:} Risk score between medium and high threshold (default: 45--80) or severity rated ``high''. Admin console notification is dispatched.
+\item \textbf{Full Mitigation Orchestration:} Risk score above high threshold (default: $\geq$80) or severity ``critical''. Admin notification, mitigation plan execution, and structured escalation are all triggered.
+\end{enumerate}
 
-This ensures structured and efficient handling of faults, reducing manual intervention and response time.
+All governance decisions are immutably recorded in a structured audit log, supporting post-incident review and ISO 55001 asset management compliance reporting.
+
 \section{Evaluation Metrics}
 
-The performance of the system is evaluated using:
+The performance of the system is evaluated using the following metrics:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Fault Detection Accuracy
-\item Classification Accuracy
-\item Latency (response time)
-\item System Reliability
+\item \textbf{Classification Accuracy:} Proportion of fault events correctly classified across all five classes (LG, LL, LLG, LLL, No Fault)
+\item \textbf{Per-Class Precision and Recall:} Fault-type-specific detection effectiveness, especially for rare fault types
+\item \textbf{Detection Latency:} Time elapsed between sensor data acquisition and fault classification output, measured in milliseconds
+\item \textbf{AI Response Time:} End-to-end time from fault detection to LLM-generated interpretation, in seconds
+\item \textbf{System Uptime:} Proportion of monitoring time with successful real-time data acquisition and classification
 \end{itemize}
 
-These metrics help assess the effectiveness of real-time detection, decision-making, and system responsiveness.
 \pagebreak
 \section{Programming Environment and Tools}
 
-The implementation of the project uses:
+The implementation of the project uses the following technologies:
 \begin{itemize}
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Python for machine learning and backend development
-\item Scikit-learn, NumPy, and Pandas for data processing and modeling
-\item Llama 3 and LangChain for AI-based reasoning and interaction
-\item Flask for backend APIs and data handling
-\item PostgreSQL for structured data storage
-\item React.js for building the monitoring dashboard
-\item Raspberry Pi OS / Embedded systems for real-time deployment
+\item \textbf{Python 3.11} for machine learning, backend logic, and sensor interfacing
+\item \textbf{Scikit-learn} for Decision Tree training, model serialization (joblib), and label encoding
+\item \textbf{NumPy and Pandas} for numerical data processing and feature construction
+\item \textbf{Llama 3.3-70b via Groq API} for LLM-based fault interpretation and cascading analysis
+\item \textbf{Flask} for the REST API backend serving prediction, history, governance, and chat endpoints
+\item \textbf{React.js} for the real-time monitoring and intelligence dashboard
+\item \textbf{PostgreSQL / CSV} for structured data storage and prediction history logging
+\item \textbf{Raspberry Pi + MCP3008 ADC} for edge-based real-time sensor data acquisition
 \end{itemize}
-
-These tools provide a complete ecosystem for building an intelligent, real-time fault detection and decision system.
 
 \section{Summary}
 
-This chapter introduced the fundamental concepts required for intelligent fault detection and predictive governance systems, including transmission line fault behavior, embedded machine learning, decision intelligence, and generative AI integration. It also outlined the tools and technologies used for implementation. These foundations support the system architecture and design methodology presented in the next chapter.
+This chapter introduced the fundamental concepts underpinning the intelligent fault detection and predictive governance system, covering transmission line fault physics, embedded machine learning, graph-based decision intelligence, and LLM-driven fault interpretation. The mathematical formulations for Decision Tree splitting, risk scoring, and governance threshold evaluation were presented. These foundations directly inform the design choices and architectural decisions detailed in the next chapter.

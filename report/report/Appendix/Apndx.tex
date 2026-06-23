@@ -1,34 +1,127 @@
-\chapter{Code}
-\section{First Appendix}
-You can use \texttt{tcblisting} for creating the code snippets. The following example illustrates how one can customize the \texttt{tcblisting} to achieve the \texttt{tcl} script. Similarly, one can use it for other programming language listing, including HDL.
+\chapter{Code Listings}
+
+\section{Decision Tree Fault Classification — Inference Pipeline}
+
+The following listing presents the core inference endpoint from \texttt{app.py}, showing the zero-current pre-screening rule and Decision Tree model invocation used for real-time fault classification.
 
 \begin{tcblisting}{listing only,colback=gray!10!white, breakable, boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
 listing options={
-language= tcl,
-basicstyle=\small\ttfamily, 
-otherkeywords={create_clock, set_clock_latency, set_input_delay, set_output_delay, set_load, set_max_fanout, set_fanout_load},
-keywordstyle=\color{blue}, 
-%keywordstyle=[2]{\color{red}},
+language=Python,
+basicstyle=\small\ttfamily,
+keywordstyle=\color{blue},
 commentstyle=\color{gray},
-backgroundcolor=\color{gray!25},
-%morekeywords=[2]{arg,pos},
-%moredelim=[is][\color{violet}]{''}{''},
-escapechar=!}}
-# Since our design has a clock with name clk, 
-## specify that name under [get_port ]
-create_clock -period 40 -waveform {0 20} [get_ports clk]
+stringstyle=\color{orange},
+backgroundcolor=\color{gray!25}}}
+# Threshold below which a phase current is treated as zero (noise floor)
+ZERO_THRESHOLD = 0.3   # Amperes
 
-# Setting a 'delay' on the clock:
-set_clock_latency 0.3 clk
+@app.route("/predict_iot")
+def predict_from_iot():
+    # Fetch live telemetry from Raspberry Pi sensor endpoint
+    iot_data = fetch_raspi_data()
 
-# Setting up constraints on your I/P and O/P pins
-set_input_delay 2.0 -clock clk [all_inputs]!\tikz[remember picture]\node[](c1){};!
-set_output_delay 1.65 -clock clk [all_outputs]!\tikz[remember picture]\node[](c2){};!
+    Va = float(iot_data.get("Va", 0))
+    Vb = float(iot_data.get("Vb", 0))
+    Vc = float(iot_data.get("Vc", 0))
+    Ia = float(iot_data.get("Ia", 0))
+    Ib = float(iot_data.get("Ib", 0))
+    Ic = float(iot_data.get("Ic", 0))
 
-# Set realistic 'loads' on each output pin
-set_load 0.1 [all_outputs]
+    # Rule-based pre-screening: count zero-current phases
+    zero_count = sum([Ia < ZERO_THRESHOLD,
+                      Ib < ZERO_THRESHOLD,
+                      Ic < ZERO_THRESHOLD])
 
-# Set 'maximum' fanin and fan-out for the input and output pins 
-set_max_fanout 1 [all_inputs]
-set_fanout_load 8 [all_outputs]      
+    if zero_count == 1:
+        fault, confidence = "LG Fault",  96.0
+    elif zero_count == 2:
+        fault, confidence = "LLG Fault", 97.0
+    elif zero_count == 3:
+        fault, confidence = "LLL Fault", 98.0
+    else:
+        # ML inference: Decision Tree model
+        X = np.array([[Va, Vb, Vc, Ia, Ib, Ic]])
+        pred = model.predict(X)[0]
+        fault = label_encoder.inverse_transform([pred])[0]
+        confidence = round(random.uniform(90, 99), 1)
+
+    timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    return jsonify({
+        "fault": fault,
+        "confidence": confidence,
+        "timestamp": timestamp
+    })
+\end{tcblisting}
+
+\section{Decision Intelligence Engine — BFS Cascade Analysis}
+
+The following listing shows the BFS-based cascade simulation and risk score computation from \texttt{services/decision\_intelligence.py}.
+
+\begin{tcblisting}{listing only,colback=gray!10!white, breakable, boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
+listing options={
+language=Python,
+basicstyle=\small\ttfamily,
+keywordstyle=\color{blue},
+commentstyle=\color{gray},
+stringstyle=\color{orange},
+backgroundcolor=\color{gray!25}}}
+def _simulate_cascade(self, seed_component):
+    """BFS traversal of the dependency graph from a seed component."""
+    visited = set()
+    queue = deque([(seed_component, 0)])
+    impacted = []
+    max_depth = 0
+
+    while queue:
+        component, depth = queue.popleft()
+        if component in visited:
+            continue
+        visited.add(component)
+        impacted.append(component)
+        max_depth = max(max_depth, depth)
+        for downstream in self.dependency_graph.get(component, []):
+            if downstream not in visited:
+                queue.append((downstream, depth + 1))
+
+    return impacted, max_depth
+
+def _compute_risk_score(self, base_severity, escalated_severity,
+                        impacted_count, max_depth,
+                        confidence, cascade_detected):
+    """Compute 0-100 risk score from fault parameters."""
+    base     = (self.SEVERITY_TO_INDEX[base_severity] + 1) * 15
+    escalated = (self.SEVERITY_TO_INDEX[escalated_severity] + 1) * 8
+    impact_term    = min(impacted_count * 3.5, 25)
+    depth_term     = min(max_depth * 7, 21)
+    confidence_term = min(max(confidence, 0), 100) * 0.12
+    cascade_term   = 10 if cascade_detected else 0
+
+    raw = (base + escalated + impact_term + depth_term
+           + confidence_term + cascade_term)
+    return int(max(0, min(100, math.floor(raw))))
+\end{tcblisting}
+
+\section{Smart Governance Layer — Policy-Driven Escalation}
+
+The following listing presents the governance workflow resolver from \texttt{services/smart\_governance.py}, showing the threshold-based escalation logic.
+
+\begin{tcblisting}{listing only,colback=gray!10!white, breakable, boxsep=0pt,top=1mm,bottom=1mm,left=1mm,right=1mm,
+listing options={
+language=Python,
+basicstyle=\small\ttfamily,
+keywordstyle=\color{blue},
+commentstyle=\color{gray},
+stringstyle=\color{orange},
+backgroundcolor=\color{gray!25}}}
+def _resolve_workflow(self, risk_score, severity):
+    """Map risk score and severity to an escalation workflow."""
+    thresholds = self.policies.get("thresholds", {})
+    high_threshold   = int(thresholds.get("high_risk_score",   80))
+    medium_threshold = int(thresholds.get("medium_risk_score", 45))
+
+    if severity == "critical" or risk_score >= high_threshold:
+        return "notify_admin_and_trigger_mitigation"
+    if severity == "high" or risk_score >= medium_threshold:
+        return "notify_admin"
+    return "log_only"
 \end{tcblisting}

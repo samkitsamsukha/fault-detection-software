@@ -10,27 +10,29 @@ This project extends beyond conventional fault detection by introducing a multi-
 
 \section{\textbf{Literature Review}}
 
-Recent research in transmission line fault detection has explored various machine learning approaches. Studies show that models such as Naive Bayes, Random Forest, and Decision Trees achieve high accuracy in classifying faults using voltage and current datasets. Decision Trees, in particular, are preferred for embedded systems due to their low computational complexity and fast inference.
+Transmission line fault detection has been an active area of research, with machine learning progressively replacing conventional relay-based schemes. Early studies demonstrated that classical algorithms such as Naive Bayes, Decision Trees, and k-Nearest Neighbours could classify the four standard fault types—Line-to-Ground (LG), Line-to-Line (LL), Double Line-to-Ground (LLG), and Three-Phase (LLL)—with promising accuracy on controlled datasets \cite{Zhang2025}.
 
-Two-stage frameworks separating fault detection and classification have been proposed to improve reliability. Ensemble learning techniques have demonstrated high accuracy in complex fault scenarios, though they often require significant computational resources, making them less suitable for real-time embedded deployment.
+Comparative evaluations have shown Decision Trees to be particularly well suited for embedded deployment due to their low computational complexity and interpretable structure, making them viable for resource-constrained edge devices \cite{EnergyInformatics2025}. Random Forest and ensemble variants substantially improve accuracy at the cost of higher computational overhead. A 2025 study combining Random Forest, LSTM, and k-Nearest Neighbours in an ensemble achieved 99.96\% accuracy on a multi-label transmission line fault dataset, while standalone Random Forest reached 97.50\% \cite{Anwar2025}.
 
-Other research has focused on fault localization using regression models, achieving high precision in estimating fault distance along transmission lines. However, most existing systems are limited to detection and classification, without addressing broader system-level implications.
+Deep learning approaches have further advanced fault classification accuracy. A 2D Convolutional Neural Network applied to scalogram image representations of voltage and current waveforms achieved 99.91\% classification accuracy across twelve fault classes \cite{CNN2D2024}. The combination of CNN and LSTM architectures achieved above 99\% accuracy in end-to-end deep learning pipelines for diverse transmission scenarios \cite{LSTM2023}. A hybrid CNN–Decision Tree framework incorporating Explainable AI (XAI) demonstrated that interpretability and high accuracy can be simultaneously achieved \cite{CNNDecisionTree2026}.
 
-Recent advancements in Artificial Intelligence have introduced Large Language Models (LLMs) for reasoning and decision support. These models enable contextual understanding, root cause analysis, and human-like explanations. However, their integration into power system monitoring remains largely unexplored.
+Research on edge deployment has validated the feasibility of running deep learning inference on embedded hardware. A study deploying multi-class fault diagnosis on edge devices achieved 98.67\% accuracy with 115.2~ms average latency, representing an 80\% latency reduction compared to cloud-based approaches \cite{EdgeML2024}. This motivates the present work's use of Raspberry Pi as the primary inference platform.
 
-Overall, existing work lacks a unified system that combines real-time detection, system-wide impact analysis, and intelligent decision-making.
+At the system intelligence level, ensemble learning with Phasor Measurement Unit (PMU) data combined with XAI methods achieved 99.83\% cross-validated accuracy and provided operator-interpretable results through SHAP attribution \cite{PMUEnsemble2024}. Cascading failure prediction using hybrid graph-based machine learning has demonstrated feasibility in interconnected multi-network energy systems \cite{HybridCascade2025}.
+
+Despite these advances, a gap persists: no existing system unifies real-time embedded classification, graph-based cascading impact analysis, and large language model (LLM) driven natural language explanation within a single governance-capable framework. The present work addresses this gap.
 
 \section{\textbf{Motivation}}
 
 Modern power grids are becoming increasingly complex, with interconnected systems where a single fault can trigger cascading failures across multiple nodes. Traditional monitoring systems are reactive, addressing faults only after they occur, leading to delays, operational risks, and economic losses.
 
-There is a growing need for systems that can not only detect faults but also understand their implications, predict potential disruptions, and assist operators in making informed decisions.
+There is a growing need for systems that can not only detect faults but also understand their implications, predict potential disruptions, and assist operators in making informed decisions. Survey literature identifies this gap explicitly: most deployed systems stop at classification without offering system-wide impact awareness or automated decision support \cite{Zhang2025,EnergyInformatics2025}.
 
 This project is motivated by the vision of transforming power grid monitoring into an intelligent, proactive, and self-assisting system. By integrating embedded machine learning with Generative AI and decision intelligence, the system aims to provide real-time insights, automate governance processes, and enhance operational efficiency.
 
 \section{\textbf{Problem Statement}}
 
-Traditional transmission line monitoring systems often rely on manual observation or basic threshold-based methods, which may not provide timely fault detection or meaningful analysis of changing electrical conditions. This can lead to delayed response, reduced reliability, and potential equipment damage. There is a need for an intelligent real-time system that can continuously monitor transmission line parameters, detect and classify fault conditions, and provide actionable insights through an accessible software platform.
+Traditional transmission line monitoring systems rely on manual observation or threshold-based relay schemes, which provide no deeper analysis of changing electrical conditions beyond fault tripping. This leads to delayed response, reduced reliability, and potential equipment damage. There is a need for an intelligent real-time system that continuously monitors transmission line parameters, detects and classifies fault conditions with greater than 95\% accuracy, and provides actionable insights through an accessible software platform.
 
 \section{\textbf{Objectives}}
 
@@ -39,23 +41,24 @@ The objectives of the project are:
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item To develop an AI-based system for real-time fault detection and classification using sensor data.
-\item To integrate embedded machine learning with a web dashboard and Generative AI for intelligent monitoring and insights.
-\item To design and implement a reliable data acquisition system using voltage and current sensors for accurate real-time measurements.
-\item To enhance power system reliability and efficiency by enabling faster fault identification and response mechanisms.
+\item To develop an AI-based system for real-time fault detection and classification using sensor data, achieving classification accuracy greater than 95\% with detection latency below 100~ms.
+\item To integrate embedded machine learning with a web dashboard and Generative AI (Llama 3.3-70b) for intelligent monitoring and operator-readable fault interpretation.
+\item To design and implement a reliable data acquisition system using ZMPT101B voltage sensors and ACS712 current sensors for accurate real-time measurements of all three phases.
+\item To implement a Decision Intelligence Engine for graph-based cascading impact analysis, producing a quantitative risk score (0--100) and priority classification for each detected fault event.
+\item To enhance power system reliability and operational efficiency by enabling structured governance workflows including automated alerting and escalation based on risk thresholds.
 \end{enumerate}
 
 \section{\textbf{Brief Methodology of the Project}}
 
 The proposed system follows a multi-layered intelligent architecture.
 
-At the edge level, voltage and current sensors continuously capture real-time transmission line data. This data is processed by an embedded system where a Decision Tree model performs low-latency fault classification.
+At the edge level, ZMPT101B voltage and ACS712 current sensors continuously capture real-time three-phase transmission line data. Analog signals are digitized using an MCP3008 10-bit ADC and fed to a Raspberry Pi, where a Decision Tree model performs low-latency fault classification across five classes: LG, LL, LLG, LLL, and No Fault.
 
-Once a fault is detected, the information is passed to a Decision Intelligence Engine, which analyzes system-wide dependencies, evaluates cascading effects, and assigns a risk score based on the severity and potential impact.
+Once a fault is detected, the information is passed to a Decision Intelligence Engine, which performs breadth-first search over a directed dependency graph of grid components. It evaluates cascading reach, computes an impact depth, and assigns a risk score (0--100) with a four-level priority designation (P1–P4).
 
-A Generative AI layer powered by Llama 3 interprets the fault context, performs root cause analysis, and generates mitigation strategies in natural language. This enables human operators to understand complex fault scenarios quickly and take informed actions.
+A Generative AI layer powered by Llama 3.3-70b (accessed via the Groq inference API) interprets the fault context, performs root cause analysis, and generates mitigation strategies in natural language. This enables human operators to understand complex fault scenarios quickly and take informed actions.
 
-The Smart Governance Layer automates alerts, escalation mechanisms, and policy-based responses, ensuring timely intervention and structured decision-making.
+The Smart Governance Layer evaluates the risk score against configurable thresholds and triggers appropriate workflows: log-only for low-risk events, admin notification for medium-risk, and full mitigation orchestration with structured escalation for critical events.
 
 Finally, a web-based dashboard built using React and Flask provides real-time visualization, historical analytics, and AI-driven insights for operators.
 
@@ -67,11 +70,11 @@ This approach transforms the system from simple fault detection to an intelligen
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Real-time sensor data is assumed to be accurate and properly calibrated
-\item Embedded systems have limited computational and memory resources
-\item Decision Tree models are chosen for efficiency, though they may have slightly lower accuracy than complex models
-\item LLM-based analysis depends on the quality of input data and contextual information
-\item Simulation of large-scale grid behavior is limited in a prototype environment
+\item Real-time sensor data is assumed to be accurately calibrated prior to deployment
+\item The embedded Raspberry Pi platform has limited computational and memory resources, constraining model complexity
+\item Decision Tree models are selected for low-latency embedded inference; accuracy is marginally lower than ensemble models but sufficient for real-time deployment
+\item LLM-based analysis depends on Groq API availability and network connectivity; a local rule-based fallback is implemented for rate-limit or connectivity failures
+\item Validation is performed in a prototype environment simulating grid fault conditions; full large-scale grid behavior is not replicated
 \end{itemize}
 
 \section{\textbf{Organization of the Report}}
@@ -81,9 +84,9 @@ This report is organized as follows:
 \setlength{\itemsep}{0pt}
 \setlength{\parskip}{0pt}
 \setlength{\parsep}{0pt}
-\item Chapter 2 discusses fundamental concepts of power systems, fault detection, and machine learning techniques
-\item Chapter 3 presents the system architecture, including embedded ML, decision intelligence, and AI integration
-\item Chapter 4 details implementation, hardware setup, and software components
-\item Chapter 5 presents results, performance evaluation, and system analysis
+\item Chapter 2 discusses fundamental concepts of power systems, fault detection, and the machine learning and AI techniques employed
+\item Chapter 3 presents the system architecture, including embedded ML model selection, decision intelligence design, and AI integration
+\item Chapter 4 details the full implementation: hardware setup, software components, and the intelligent response pipeline
+\item Chapter 5 presents results, performance evaluation, and comparison with baseline and existing systems
 \item Chapter 6 concludes the work and outlines future enhancements in predictive governance and smart grid systems
 \end{itemize}
